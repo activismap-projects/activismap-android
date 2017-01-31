@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"
+        android:layout_marginRight="5dp">
+
+        <com.entropy_factory.activismap.widget.RemoteImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/activismo"
+            android:scaleType="centerInside"/>
+
+        <com.entropy_factory.activismap.widget.ItemClassificationView
+            android:id="@+id/classification"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:itemSize="10dp"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:orientation="vertical">
+
+        <com.entropy_factory.activismap.view.FontTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Event title"
+            android:textSize="20dp"
+            app:font="bold"/>
+
+        <com.entropy_factory.activismap.view.FontTextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Event description"/>
+    </LinearLayout>
+</LinearLayout>

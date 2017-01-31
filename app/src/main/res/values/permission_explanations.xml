@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="explanations_location">We need access to your location so you can find the address you are looking for.</string>
+    <string name="explanations_storage">We need to access the external storage for storing multimedia files.</string>
+</resources>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/activity_category_selector"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:animateLayoutChanges="true"
+    tools:context="com.entropy_factory.activismap.ui.tool.CategorySelectorActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.entropy_factory.activismap.view.FontTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/classification_explanation"
+        android:layout_marginBottom="10dp"/>
+
+    <com.entropy_factory.activismap.view.FontTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/classification_dots"
+        app:font="bold"
+        android:layout_marginBottom="10dp"/>
+
+    <com.entropy_factory.activismap.widget.ItemClassificationView
+        android:id="@+id/item_classification"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        app:itemSize="30dp"
+        android:layout_marginBottom="10dp"/>
+
+    <com.entropy_factory.activismap.view.FontTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_type"
+        app:font="bold"
+        android:layout_marginBottom="10dp"/>
+
+    <com.entropy_factory.activismap.widget.TypeClassificationView
+        android:id="@+id/type_selector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemSize="45dp"
+        app:itemPadding="5dp"
+        android:layout_marginBottom="10dp"/>
+
+
+    <com.entropy_factory.activismap.view.FontTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_categories"
+        app:font="bold"
+        android:layout_marginBottom="10dp"/>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.entropy_factory.activismap.widget.CategoryView
+                android:id="@+id/category_selector"
+                app:itemPadding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

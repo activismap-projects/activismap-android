@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name" translatable="false">ActivisMap</string>
+    <string name="open_file_error">Error trying open file</string>
+    <string name="pick_image">Select your event image</string>
+    <string name="new_event">New event</string>
+    <string name="creating_event">Creating event…</string>
+    <string name="enable_permissions">Enable permissions</string>
+    <string name="searching_location">Searching location…</string>
+    <string name="location">Location</string>
+    <string name="cannot_find_location">Can not find your location</string>
+    <string name="mandatory_field">Mandatory field</string>
+
+    <string name="title_activity_register">Sign up</string>
+    <string name="username">Username</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="register">Register</string>
+    <string name="person_name">Personal name (optional)</string>
+    <string name="sending_data">Sending data…</string>
+    <string name="passwords_must_match">Passwords must match</string>
+    <string name="login">Sign in</string>
+    <string name="username_or_email">Username or email</string>
+    <string name="sign_in">Sign in</string>
+    <string name="logging">Logging…</string>
+    <string name="edit">Edit</string>
+    <string name="type_a_comment">Type a comment</string>
+    <string name="no_granted_companies">We have not found any companies in which you are authorized to post events. If you have received rcientemente some type of authorization, please go to your profile and refresh your account.</string>
+    <string name="selected_company">Selected company</string>
+    <string name="event_title">Event title</string>
+    <string name="event_description">Event description</string>
+    <string name="comments_dots">Comments:</string>
+    <string name="events_three_months">For 3 months</string>
+    <string name="events_this_month">This month</string>
+    <string name="events_this_week">This week</string>
+    <string name="people_attend_event">people will attend the event.</string>
+    <string name="people_favor_event">people are int favor of the event</string>
+    <string name="people_against_event">people are against the event</string>
+    <string name="select_start_date">Select start date</string>
+    <string name="select_end_date">Select end date</string>
+    <string name="select_location">Select location</string>
+    <string name="select_event_classification">Select event classification</string>
+    <string name="indicate_event_classification">You must indicate the classification of the event.</string>
+    <string name="classification_explanation">Select the classification of the event. The type indicates that it is the event and the categories indicate the related topics. Press and hold on the icon to display the related information.</string>
+    <string name="select_type">You can select a type of the following:</string>
+    <string name="select_categories">You can select up to 3 different categories:</string>
+    <string name="done">Done</string>
+    <string name="classification_dots">Classification:</string>
+    <string name="event_radar">Event radar</string>
+    <string name="my_events">My events</string>
+    <string name="add_event">Add event</string>
+    <string name="categories">Categories</string>
+    <string name="tools">Tools</string>
+    <string name="anonymous">Anonymous</string>
+    <string name="published_by_dots">Published by:</string>
+</resources>

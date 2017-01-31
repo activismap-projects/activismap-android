@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#483737</color>
+    <color name="colorPrimaryLight">#664e4e</color>
+    <color name="colorPrimaryHint">#78664e4e</color>
+    <color name="colorPrimaryDark">#291f1f</color>
+    <color name="colorAccent">#5D6C53</color>
+    <color name="colorSecondary">#5D6C53</color>
+    <color name="colorSecondaryLight">#5D6C53</color>
+    <color name="colorSecondaryHint">#5D6C53</color>
+
+    <color name="white">#fff</color>
+    <color name="white_pressed">#d2d2d2</color>
+    <color name="white_smoke">#f7f7f7</color>
+    <color name="white_smoke2">#e7e7e7</color>
+    <color name="white_semitransparent">#afffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="black">#000000</color>
+    <color name="black_gray">#4C4C4C</color>
+    <color name="icon_pressed">#95000000</color>
+
+    <color name="ttlm_default_background_color">#EE131518</color>
+    <color name="ttlm_default_stroke_color">#FFE9ECEF</color>
+
+    <color name="black_overlay">#66000000</color>
+
+    <color name="like">#88c5ed</color>
+    <color name="like_dark">#3b5d73</color>
+    <color name="dislike">#ed888a</color>
+    <color name="dislike_dark">#733b3c</color>
+    <color name="navigation">#2A6AD4</color>
+</resources>

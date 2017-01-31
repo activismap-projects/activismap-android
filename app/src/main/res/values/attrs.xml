@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="likeStatus" format="enum">
+        <enum name="dislike" value="-1" />
+        <enum name="like" value="1" />
+        <enum name="neutral" value="0" />
+    </attr>
+
+    <attr name="itemSpacing" format="dimension" />
+    <attr name="itemSize" format="dimension" />
+    <attr name="itemPadding" format="dimension" />
+    <attr name="multipleSelection" format="boolean"/>
+
+    <declare-styleable name="FontTextView">
+        <attr name="font" format="enum">
+            <enum name="extra_light" value="0"/>
+            <enum name="extra_light_italic" value="1"/>
+            <enum name="light" value="2"/>
+            <enum name="light_italic" value="3"/>
+            <enum name="regular" value="4"/>
+            <enum name="semi_bold" value="5"/>
+            <enum name="semi_bold_italic" value="6"/>
+            <enum name="bold" value="7"/>
+            <enum name="bold_italic" value="8"/>
+            <enum name="black" value="9"/>
+            <enum name="medium" value="10"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="FontEditText">
+        <attr name="fontEditText" format="enum">
+            <enum name="extra_light" value="0"/>
+            <enum name="extra_light_italic" value="1"/>
+            <enum name="light" value="2"/>
+            <enum name="light_italic" value="3"/>
+            <enum name="regular" value="4"/>
+            <enum name="semi_bold" value="5"/>
+            <enum name="semi_bold_italic" value="6"/>
+            <enum name="bold" value="7"/>
+            <enum name="bold_italic" value="8"/>
+            <enum name="black" value="9"/>
+            <enum name="medium" value="10"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="FontButton">
+        <attr name="fontButton" format="enum">
+            <enum name="extra_light" value="0"/>
+            <enum name="extra_light_italic" value="1"/>
+            <enum name="light" value="2"/>
+            <enum name="light_italic" value="3"/>
+            <enum name="regular" value="4"/>
+            <enum name="semi_bold" value="5"/>
+            <enum name="semi_bold_italic" value="6"/>
+            <enum name="bold" value="7"/>
+            <enum name="bold_italic" value="8"/>
+            <enum name="black" value="9"/>
+            <enum name="medium" value="10"/>
+        </attr>
+    </declare-styleable>
+
+    <attr name="ttlm_defaultStyle" format="reference"/>
+
+    <declare-styleable name="TooltipLayout">
+        <attr name="ttlm_padding" format="dimension"/>
+        <attr name="ttlm_strokeColor" format="color"/>
+        <attr name="ttlm_backgroundColor" format="color"/>
+        <attr name="ttlm_strokeWeight" format="dimension"/>
+        <attr name="ttlm_cornerRadius" format="dimension"/>
+        <attr name="ttlm_arrowRatio" format="float"/>
+    </declare-styleable>
+
+    <declare-styleable name="ButtonBarContainerTheme">
+        <attr name="metaButtonBarStyle" format="reference"/>
+        <attr name="metaButtonBarButtonStyle" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="LikeView">
+        <attr name="likeStatus" />
+    </declare-styleable>
+
+    <declare-styleable name="ItemClassificationView">
+        <attr name="itemSize"  />
+        <attr name="itemSpacing"/>
+        <attr name="itemPadding"/>
+    </declare-styleable>
+
+    <declare-styleable name="ClassificationView">
+        <attr name="itemSize"  />
+        <attr name="itemSpacing" />
+        <attr name="itemPadding" />
+    </declare-styleable>
+
+    <declare-styleable name="OptionsView">
+        <attr name="itemSpacing" />
+        <attr name="itemPadding" />
+        <attr name="multipleSelection"/>
+    </declare-styleable>
+
+    <declare-styleable name="ProfileView">
+        <attr name="textNameSize" format="dimension" />
+        <attr name="textDetailSize" format="dimension" />
+        <attr name="textNameColor" format="color" />
+        <attr name="textDetailColor" format="color" />
+        <attr name="showName" format="boolean" />
+        <attr name="showUsername" format="boolean" />
+    </declare-styleable>
+</resources>

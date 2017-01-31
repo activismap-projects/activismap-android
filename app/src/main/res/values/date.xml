@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="yesterday_at">Yesterday, at %1$s</string>
+    <string name="day_at">%1$s %2$d, at %3$s</string>
+    <string name="month_at">%1$s %2$d of %3$s, at %4$s</string>
+    <string name="year_at">%1$s %2$d of %3$s, %4$d at %5$s</string>
+    <string name="today_at">Today, at %1$s</string>
+    <string name="tomorrow_at">Tomorrow, at %1$s</string>
+    <string name="date_construct">From %1$s to %2$s</string>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--ASSEMBLY, LEARNING, TALKING, MANIFESTATION, FESTIVAL, MARKET;-->
+    <string-array name="assembly">
+        <item>Assemblea</item>
+    </string-array>
+
+    <string-array name="learning">
+        <item>Aprenentatge</item>
+        <item>Curs</item>
+        <item>Taller</item>
+    </string-array>
+
+    <string-array name="talking">
+        <item>Chat</item>
+        <item>Ponència</item>
+        <item>Debat</item>
+    </string-array>
+
+    <string-array name="manifestation">
+        <item>Manisfestació</item>
+        <item>Concetració</item>
+        <item>Marxa</item>
+    </string-array>
+
+    <string-array name="festival">
+        <item>Concert</item>
+        <item>Revetlla</item>
+        <item>Cercavila</item>
+    </string-array>
+
+    <string-array name="market">
+        <item>Mercat</item>
+        <item>Fira</item>
+    </string-array>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="role_super_admin">Administrator</string>
+    <string name="role_admin">Moderator</string>
+    <string name="role_publisher">Event creator</string>
+    <string name="role_unknown">Unknown</string>
+</resources>

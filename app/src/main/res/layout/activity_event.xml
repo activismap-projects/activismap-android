@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:fillViewport="true"
+    tools:context=".ui.content.EventActivity"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleGravity="center|left"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:fitsSystemWindows="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_collapseMode="parallax">
+
+                <com.entropy_factory.activismap.widget.RemoteImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/city"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/event_image"/>
+
+                <com.entropy_factory.activismap.view.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="\ue006"
+                    android:textColor="@android:color/white"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="35dp"
+                    android:id="@+id/like_icon"/>
+
+                <com.entropy_factory.activismap.view.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="\ue7ff"
+                    android:textColor="@android:color/white"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="35dp"
+                    android:id="@+id/subscribe_icon"
+                    android:layout_alignParentBottom="true"/>
+
+                <com.entropy_factory.activismap.widget.ItemClassificationView
+                    android:id="@+id/classification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    app:itemSize="25dp"
+                    app:itemSpacing="3dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_collapseMode="pin"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:animateLayoutChanges="true">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                app:contentPadding="5dp"
+                android:elevation="0dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <com.entropy_factory.activismap.view.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="\ue8d2"
+                        android:textSize="25dp"/>
+
+                    <com.entropy_factory.activismap.view.FontTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:font="regular"
+                        android:text="Aquí ira la descripción del evento. En teoría tiene que ser larga, pero quien sabe cuantas líneas de o  carácteres debería de llevar la descripción. Bueno, da igual ya lo iremos viendo conforme se dearrolla la aplicacion."
+                        android:id="@+id/event_description"/>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.entropy_factory.activismap.view.FontTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/published_by_dots"
+                        app:font="bold"
+                        android:layout_marginLeft="7sp"/>
+
+                    <com.entropy_factory.activismap.widget.ProfileView
+                        android:id="@+id/company_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:showUsername="false"
+                        android:layout_marginTop="5sp"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                app:contentPadding="5dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.entropy_factory.activismap.view.MaterialTextView
+                            android:layout_height="match_parent"
+                            android:text="\ue191"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="25dp"
+                            android:layout_width="35dp"/>
+
+                        <com.entropy_factory.activismap.view.FontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="3dp"
+                            android:gravity="center_vertical"
+                            app:font="regular"
+                            android:text="Desde Mañana, a las 15:30, hasta el Jueves 13 alas 17:00"
+                            android:id="@+id/event_time"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.entropy_factory.activismap.view.MaterialTextView
+                            android:layout_height="match_parent"
+                            android:text="\ue55f"
+                            android:textSize="25dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.1"
+                            android:textColor="#DD4936"/>
+
+                        <com.entropy_factory.activismap.view.FontTextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="3dp"
+                            android:gravity="center_vertical"
+                            app:font="regular"
+                            android:text="Plaza de las Aves, 12569, Madrid"
+                            android:id="@+id/event_location"
+                            android:layout_weight="0.8"/>
+
+                        <com.entropy_factory.activismap.view.MaterialTextView
+                            android:layout_height="match_parent"
+                            android:text="\ue569"
+                            android:textColor="@color/navigation"
+                            android:textSize="25dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.1"
+                            android:gravity="center"
+                            android:id="@+id/open_navigation"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.entropy_factory.activismap.view.MaterialTextView
+                            android:layout_height="wrap_content"
+                            android:text="\ue7ef"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="25dp"
+                            android:layout_width="35dp"/>
+
+                        <com.entropy_factory.activismap.view.FontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            app:font="bold"
+                            android:layout_marginLeft="3dp"
+                            android:text="289"
+                            android:maxLength="4"
+                            android:maxLines="1"
+                            android:minEms="2"
+                            android:id="@+id/event_persons"/>
+
+                        <com.entropy_factory.activismap.view.FontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="3dp"
+                            android:gravity="center_vertical"
+                            app:font="regular"
+                            android:text="@string/people_attend_event"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.entropy_factory.activismap.view.MaterialTextView
+                            android:layout_width="35dp"
+                            android:layout_height="wrap_content"
+                            android:text="\ue8dc"
+                            android:textColor="@color/like"
+                            android:textSize="25dp"/>
+
+                        <com.entropy_factory.activismap.view.FontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            app:font="bold"
+                            android:layout_marginLeft="3dp"
+                            android:text="289"
+                            android:maxLength="4"
+                            android:maxLines="1"
+                            android:minEms="2"
+                            android:id="@+id/event_likes"/>
+
+                        <com.entropy_factory.activismap.view.FontTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="3dp"
+                            android:gravity="center_vertical"
+                            app:font="regular"
+                            android:text="@string/people_favor_event"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.entropy_factory.activismap.view.MaterialTextView
+                            android:layout_width="35dp"
+                            android:layout_height="wrap_content"
+                            android:text="\ue8db"
+                            android:textColor="@color/dislike"
+                            android:textSize="25dp"/>
+
+                        <com.entropy_factory.activismap.view.FontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            app:font="bold"
+                            android:layout_marginLeft="3dp"
+                            android:text="29"
+                            android:maxLength="4"
+                            android:maxLines="1"
+                            android:minEms="2"
+                            android:id="@+id/event_dislikes"/>
+
+                        <com.entropy_factory.activismap.view.FontTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="3dp"
+                            android:gravity="center_vertical"
+                            app:font="regular"
+                            android:text="@string/people_against_event"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                app:contentPadding="5dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:animateLayoutChanges="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <com.entropy_factory.activismap.view.FontTextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.9"
+                            android:layout_marginLeft="3dp"
+                            android:text="@string/comments_dots"
+                            app:font="bold"
+                            android:gravity="center_vertical"/>
+
+                        <com.entropy_factory.activismap.view.MaterialTextView
+                            android:id="@+id/action_comment"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.1"
+                            android:text="\ue0d8"
+                            android:textSize="25dp"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <com.entropy_factory.activismap.view.FontEditText
+                        android:id="@+id/comment_box"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:maxLines="4"
+                        android:inputType="textCapSentences"
+                        android:hint="@string/type_a_comment"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/comment_row"
+                android:id="@+id/list"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

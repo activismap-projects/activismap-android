@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--ASSEMBLY, LEARNING, TALKING, MANIFESTATION, FESTIVAL, MARKET;-->
+    <string-array name="assembly">
+        <item>Assembly</item>
+    </string-array>
+
+    <string-array name="learning">
+        <item>Learning</item>
+        <item>Course</item>
+        <item>Workshop</item>
+    </string-array>
+
+    <string-array name="talking">
+        <item>Chat</item>
+        <item>Paper</item>
+        <item>Discussion</item>
+    </string-array>
+
+    <string-array name="manifestation">
+        <item>Manifestation</item>
+        <item>Concentration</item>
+        <item>March</item>
+    </string-array>
+
+    <string-array name="festival">
+        <item>Concert</item>
+        <item>Vervain</item>
+        <item>Passacaglia</item>
+    </string-array>
+
+    <string-array name="market">
+        <item>Market</item>
+        <item>Fair</item>
+    </string-array>
+</resources>

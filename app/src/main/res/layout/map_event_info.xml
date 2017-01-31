@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <com.entropy_factory.activismap.widget.RemoteImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.entropy_factory.activismap.view.FontTextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Event title"
+        app:font="bold"
+        android:textSize="24dp"/>
+
+    <com.entropy_factory.activismap.view.FontTextView
+        android:id="@+id/desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Esto es una descripciñon breve de lo que podria ser una descripción de un evento marcado en el mapa"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="20dp"/>
+
+    <com.entropy_factory.activismap.view.FontTextView
+        android:id="@+id/info_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Termina el jue, 23 de nov"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="18dp"/>
+</LinearLayout>

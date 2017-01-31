@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:animateLayoutChanges="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:id="@+id/map_container">
+
+        <org.osmdroid.views.MapView
+            android:id="@+id/map2"
+            android:animateLayoutChanges="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <com.entropy_factory.activismap.widget.TimeSelectorView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp" />
+
+    <com.entropy_factory.activismap.widget.TypeClassificationView
+        android:id="@+id/category_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        app:itemSpacing="8dp"
+        app:itemSize="25dp"
+        android:orientation="vertical">
+    </com.entropy_factory.activismap.widget.TypeClassificationView>
+
+
+</RelativeLayout>

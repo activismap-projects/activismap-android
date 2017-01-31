@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.tool.MapsActivity">
+
+    <fragment android:id="@+id/map"
+              android:name="com.google.android.gms.maps.SupportMapFragment"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"/>
+
+    <com.entropy_factory.activismap.view.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_pressed_effect"
+        android:text="\ue1b3"
+        android:textSize="50dp"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignRight="@+id/map"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/catch_location"
+        android:layout_above="@+id/handle_location"/>
+
+    <com.entropy_factory.activismap.view.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_pressed_effect"
+        android:text="\ue8b4"
+        android:textSize="50dp"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignBottom="@+id/map"
+        android:layout_alignRight="@+id/map"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="65dp"
+        android:id="@+id/handle_location"/>
+
+</RelativeLayout>
