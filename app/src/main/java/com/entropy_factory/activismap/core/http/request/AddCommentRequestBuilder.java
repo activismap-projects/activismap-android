@@ -1,5 +1,6 @@
 package com.entropy_factory.activismap.core.http.request;
 
+import com.entropy_factory.activismap.core.db.User;
 import com.entropy_factory.activismap.core.http.request.base.BaseGetRequestBuilder;
 import com.entropy_factory.activismap.core.http.request.base.BasePostRequestBuilder;
 import com.entropy_factory.activismap.core.item.ActivisItem;
@@ -23,6 +24,11 @@ public class AddCommentRequestBuilder extends BasePostRequestBuilder {
 
     @Override
     protected String getURL() {
+        User user = User.getUser();
+        if (user != null && !user.isAccessTokenExpired()) {
+            return super.getURL() + "v1/event/" + item.getIdentifier() + "/addComment";
+        }
+
         return super.getURL() + "v1/public/event/" + item.getIdentifier() + "/addComment";
     }
 
