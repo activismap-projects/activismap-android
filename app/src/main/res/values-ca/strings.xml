@@ -54,4 +54,9 @@
     <string name="username_or_email">Nom d\'usuario o email</string>
     <string name="anonymous">Anònim</string>
     <string name="published_by_dots">Publicat per:</string>
+    <string name="from_gallery">Des de la galeria</string>
+    <string name="from_internet">Des d\'internet</string>
+    <string name="input_image_url">Introduïu l\'url de l\'imatge</string>
+    <string name="internet_image">Imatge d\'Internet</string>
+    <string name="select_an_option">Seleccioneu una opció</string>
 </resources>

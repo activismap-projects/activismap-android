@@ -55,7 +55,7 @@
     <string name="published_by_dots">Published by:</string>
     <string name="from_gallery">From gallery</string>
     <string name="from_internet">From internet</string>
-    <string name="input_image_url">Enter de url for the image</string>
+    <string name="input_image_url">Enter the url for the image</string>
     <string name="internet_image">Internet image</string>
     <string name="select_an_option">Select an option</string>
 </resources>

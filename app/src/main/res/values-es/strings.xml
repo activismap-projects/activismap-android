@@ -54,4 +54,9 @@
     <string name="tools">Herramientas</string>
     <string name="anonymous">Anónimo</string>
     <string name="published_by_dots">Publicado por:</string>
+    <string name="from_gallery">Desde la galería</string>
+    <string name="from_internet">Desde internet</string>
+    <string name="input_image_url">Intriduce la url de la imagen</string>
+    <string name="internet_image">Imagen de Internet</string>
+    <string name="select_an_option">Selecciona una opción</string>
 </resources>
