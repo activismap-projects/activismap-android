@@ -35,7 +35,6 @@ import com.entropy_factory.activismap.core.db.User;
 import com.entropy_factory.activismap.ui.base.AbstractOptionListener;
 import com.entropy_factory.activismap.ui.tool.CategorySelectorActivity;
 import com.entropy_factory.activismap.util.DialogFactory;
-import com.entropy_factory.activismap.util.DialogOptionLinstener;
 import com.entropy_factory.activismap.util.FileUtils;
 import com.entropy_factory.activismap.util.FormUtils;
 import com.entropy_factory.activismap.util.IntentUtils;
