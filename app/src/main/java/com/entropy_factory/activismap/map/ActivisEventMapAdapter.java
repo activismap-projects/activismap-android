@@ -1,7 +1,6 @@
 package com.entropy_factory.activismap.map;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.support.annotation.StringRes;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +8,8 @@ import android.widget.TextView;
 
 import com.entropy_factory.activismap.R;
 import com.entropy_factory.activismap.core.db.ActivisEvent;
-import com.entropy_factory.activismap.ui.content.EventActivity;
 import com.entropy_factory.activismap.util.TimeUtils;
-import com.entropy_factory.activismap.widget.RemoteImageView;
+import com.entropy_factory.activismap.widget.ProfileImageView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
@@ -42,7 +40,7 @@ public class ActivisEventMapAdapter implements GoogleMap.InfoWindowAdapter {
         TextView title = (TextView) v.findViewById(R.id.title);
         TextView desc = (TextView) v.findViewById(R.id.desc);
         TextView date = (TextView) v.findViewById(R.id.info_date);
-        RemoteImageView image = (RemoteImageView) v.findViewById(R.id.image);
+        ProfileImageView image = (ProfileImageView) v.findViewById(R.id.image);
 
         title.setText(event.getTitle());
         desc.setText(event.getDescription());

@@ -14,20 +14,20 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by ander on 27/07/16.
  */
-public class RemoteImageView extends ImageView {
+public class ProfileImageView extends CircleImageView {
 
     private static final String TAG = "RemoteImageView";
 
 
-    public RemoteImageView(Context context) {
+    public ProfileImageView(Context context) {
         super(context);
     }
 
-    public RemoteImageView(Context context, AttributeSet attrs) {
+    public ProfileImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public RemoteImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ProfileImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

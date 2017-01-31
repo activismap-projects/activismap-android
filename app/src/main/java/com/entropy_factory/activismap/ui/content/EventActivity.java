@@ -28,13 +28,13 @@ import com.entropy_factory.activismap.core.db.ActivisType;
 import com.entropy_factory.activismap.core.item.ActivisItem;
 import com.entropy_factory.activismap.core.item.Comment;
 import com.entropy_factory.activismap.ui.adapter.CommentAdapter;
-import com.entropy_factory.activismap.ui.adapter.CommentItem;
 import com.entropy_factory.activismap.util.IntentUtils;
 import com.entropy_factory.activismap.util.TimeUtils;
 import com.entropy_factory.activismap.util.Utils;
 import com.entropy_factory.activismap.widget.ItemClassificationView;
 import com.entropy_factory.activismap.view.LikeView;
 import com.entropy_factory.activismap.widget.ProfileView;
+import com.entropy_factory.activismap.widget.ProfileImageView;
 import com.entropy_factory.activismap.widget.RemoteImageView;
 
 import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;

@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import com.entropy_factory.activismap.R;
 import com.entropy_factory.activismap.widget.ItemClassificationView;
-import com.entropy_factory.activismap.widget.RemoteImageView;
+import com.entropy_factory.activismap.widget.ProfileImageView;
 import com.github.tibolte.agendacalendarview.render.EventRenderer;
 
 /**
@@ -17,7 +17,7 @@ public class ActivisRenderer extends EventRenderer<AgendaEvent> {
 
     @Override
     public void render(View view, AgendaEvent event) {
-        RemoteImageView image = (RemoteImageView) view.findViewById(R.id.image);
+        ProfileImageView image = (ProfileImageView) view.findViewById(R.id.image);
         TextView title = (TextView) view.findViewById(R.id.title);
         TextView description = (TextView) view.findViewById(R.id.description);
         ItemClassificationView classificationView = (ItemClassificationView) view.findViewById(R.id.classification);

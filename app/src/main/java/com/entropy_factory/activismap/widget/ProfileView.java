@@ -21,7 +21,7 @@ public class ProfileView extends LinearLayout {
 
     private static final String TAG = "ProfileView";
 
-    private RemoteImageView avatar;
+    private ProfileImageView avatar;
     private FontTextView name;
     private FontTextView detailText;
 
@@ -48,7 +48,7 @@ public class ProfileView extends LinearLayout {
         LayoutParams nameParams = new LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 0.8f);
         nameParams.setMargins(Utils.convertDpToPixels(getContext(), 10), 0, 0, 0);
 
-        avatar = new RemoteImageView(getContext());
+        avatar = new ProfileImageView(getContext());
         avatar.setImageResource(R.mipmap.ic_launcher);
         avatar.setLayoutParams(avatarParams);
 
