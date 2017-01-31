@@ -2,7 +2,6 @@ package com.entropy_factory.activismap.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Path;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
@@ -21,6 +20,8 @@ import com.entropy_factory.activismap.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.view.Gravity.CENTER;
+
 /**
  * Created by Andersson G. Acosta on 20/01/17.
  */
@@ -32,7 +33,7 @@ public class OptionsView<T> extends LinearLayout {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
-    private int optonsByPanel = 4;
+    private int optionsByPanel = 4;
     private List<Option<T>> options;
     private int itemSpacing;
     private OnOptionClickListener<Option<T>> onOptionClickListener;
@@ -78,7 +79,7 @@ public class OptionsView<T> extends LinearLayout {
     private void invalidateView() {
         removeAllViews();
 
-        int rows = (int) Math.ceil(options.size() / optonsByPanel);
+        int rows = (int) Math.ceil(options.size() / optionsByPanel);
 
         int rowOrientation = getOrientation() == VERTICAL ? HORIZONTAL : VERTICAL;
         LayoutParams rowParams;
@@ -100,7 +101,7 @@ public class OptionsView<T> extends LinearLayout {
             rowLayout.setOrientation(rowOrientation);
             rowLayout.setLayoutParams(rowParams);
 
-            for (int y = 0; y < optonsByPanel; y++) {
+            for (int y = 0; y < optionsByPanel; y++) {
                 if (optionIndex >= options.size()) {
                     break;
                 }
@@ -128,7 +129,8 @@ public class OptionsView<T> extends LinearLayout {
                 if (hasText) {
                     TextView textView = new TextView(getContext());
                     textView.setText(option.text);
-                    textView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                    textView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    textView.setGravity(CENTER);
                     optionLayout.addView(textView);
                     addOption = true;
                 }
@@ -164,6 +166,15 @@ public class OptionsView<T> extends LinearLayout {
 
             addView(rowLayout);
         }
+    }
+
+    public void setOptionsByPanel(int optionsByPanel) {
+        this.optionsByPanel = optionsByPanel;
+        invalidateView();
+    }
+
+    public int getOptionsByPanel() {
+        return optionsByPanel;
     }
 
     public void setOnOptionClickListener(OnOptionClickListener<Option<T>> onOptionClickListener) {
@@ -208,7 +219,15 @@ public class OptionsView<T> extends LinearLayout {
         addOption(getResources().getDrawable(icon), getContext().getString(text));
     }
 
-    public class Option<T> {
+    public void addOption(@DrawableRes int icon, @StringRes int text, T object) {
+        addOption(getResources().getDrawable(icon), getContext().getString(text), object);
+    }
+
+    public int getOptionsCount() {
+        return options.size();
+    }
+
+    public static class Option<T> {
         public Drawable icon;
         public CharSequence text;
         public T object;

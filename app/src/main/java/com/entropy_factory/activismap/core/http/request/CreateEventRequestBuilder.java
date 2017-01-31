@@ -1,5 +1,7 @@
 package com.entropy_factory.activismap.core.http.request;
 
+import android.text.TextUtils;
+
 import com.entropy_factory.activismap.core.db.ActivisType;
 import com.entropy_factory.activismap.core.db.Company;
 import com.entropy_factory.activismap.core.http.request.base.BasePostRequestBuilder;
@@ -24,6 +26,7 @@ public class CreateEventRequestBuilder extends BasePostRequestBuilder {
     private long sDate;
     private long eDate;
     private File image;
+    private String imageUrl;
 
     public CreateEventRequestBuilder(Company company, String title, String description, String categories, ActivisType type, LatLng location, long sDate, long eDate) {
         this.company = company;
@@ -38,6 +41,10 @@ public class CreateEventRequestBuilder extends BasePostRequestBuilder {
 
     public void setImage(File image) {
         this.image = image;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @Override
@@ -57,6 +64,10 @@ public class CreateEventRequestBuilder extends BasePostRequestBuilder {
         params.put("lon", String.valueOf(location.longitude));
         params.put("start_date", String.valueOf(sDate));
         params.put("end_date", String.valueOf(eDate));
+
+        if (!TextUtils.isEmpty(imageUrl)) {
+            params.put("image", imageUrl);
+        }
         return params;
     }
 

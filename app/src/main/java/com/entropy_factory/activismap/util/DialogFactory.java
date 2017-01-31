@@ -7,7 +7,12 @@ import android.content.DialogInterface;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+
+import com.entropy_factory.activismap.R;
+import com.entropy_factory.activismap.widget.ImageResourceOptionsView;
+import com.entropy_factory.activismap.widget.OptionsView;
 
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;

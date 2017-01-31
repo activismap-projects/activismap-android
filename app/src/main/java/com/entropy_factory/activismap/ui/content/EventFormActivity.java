@@ -1,38 +1,50 @@
 package com.entropy_factory.activismap.ui.content;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.entropy_factory.activismap.R;
 import com.entropy_factory.activismap.core.activis.Activis;
-import com.entropy_factory.activismap.core.activis.BaseActivis;
 import com.entropy_factory.activismap.core.activis.ActivisListener;
 import com.entropy_factory.activismap.core.activis.ActivisResponse;
 import com.entropy_factory.activismap.core.db.ActivisCategory;
 import com.entropy_factory.activismap.core.db.ActivisEvent;
 import com.entropy_factory.activismap.core.db.ActivisType;
 import com.entropy_factory.activismap.core.db.User;
+import com.entropy_factory.activismap.ui.base.AbstractOptionListener;
 import com.entropy_factory.activismap.ui.tool.CategorySelectorActivity;
+import com.entropy_factory.activismap.util.DialogFactory;
+import com.entropy_factory.activismap.util.DialogOptionLinstener;
 import com.entropy_factory.activismap.util.FileUtils;
 import com.entropy_factory.activismap.util.FormUtils;
 import com.entropy_factory.activismap.util.IntentUtils;
 import com.entropy_factory.activismap.util.TimeUtils;
 import com.entropy_factory.activismap.util.Utils;
-import com.entropy_factory.activismap.widget.ClassificationView;
+import com.entropy_factory.activismap.widget.ImageResourceOptionsView;
 import com.entropy_factory.activismap.widget.ItemClassificationView;
+import com.entropy_factory.activismap.widget.OptionsView;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.model.LatLng;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
@@ -41,7 +53,6 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -66,6 +77,7 @@ public class EventFormActivity extends AppCompatActivity {
     private LatLng location;
     private ImageView eventImage;
     private File fileImage;
+    private String imageUrl;
     private View pick;
     private View pickText;
     private TextView locationView;
@@ -76,6 +88,11 @@ public class EventFormActivity extends AppCompatActivity {
     private EditText title;
     private EditText description;
     private Activis activis;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -145,7 +162,7 @@ public class EventFormActivity extends AppCompatActivity {
         pick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                IntentUtils.openGallery(EventFormActivity.this);
+                showPickOptions();
             }
         });
 
@@ -176,7 +193,94 @@ public class EventFormActivity extends AppCompatActivity {
                 send();
             }
         });
+    }
 
+    private void showPickOptions() {
+
+        View optionsView = LayoutInflater.from(this).inflate(R.layout.media_options_dialog, null);
+        ImageResourceOptionsView optionsPanel = (ImageResourceOptionsView) optionsView.findViewById(R.id.options_panel);
+
+        final AlertDialog aDialog = DialogFactory.alert(this, R.string.select_an_option, optionsView);
+
+        optionsPanel.setOnOptionClickListener(new AbstractOptionListener<OptionsView.Option<Integer>>() {
+            @Override
+            public void onOptionClick(View v, OptionsView.Option<Integer> option) {
+                int o = option.object;
+                switch (o) {
+                    case 1:
+                        IntentUtils.openGallery(EventFormActivity.this);
+                        aDialog.dismiss();
+                        break;
+                    case 2:
+                        inflateUrlImageDialog();
+                        aDialog.dismiss();
+
+                }
+            }
+        });
+
+        aDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        aDialog.show();
+
+
+    }
+
+    private void inflateUrlImageDialog() {
+        View v = LayoutInflater.from(this).inflate(R.layout.url_image_dialog, null);
+        final EditText urlInput = (EditText) v.findViewById(R.id.url_input);
+        final ImageView image = (ImageView) v.findViewById(R.id.image);
+
+        urlInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (URLUtil.isValidUrl(charSequence.toString())) {
+                    Glide.with(EventFormActivity.this).load(charSequence.toString())
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .dontAnimate()
+                            .fitCenter().into(image);
+
+                    pickText.setVisibility(View.GONE);
+                    eventImage.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        AlertDialog aDialog = DialogFactory.alert(this, R.string.internet_image, v);
+        aDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(android.R.string.ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                imageUrl = urlInput.getText().toString();
+                Glide.with(EventFormActivity.this).load(imageUrl)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .dontAnimate()
+                        .fitCenter().into(eventImage);
+            }
+        });
+
+        aDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        aDialog.show();
     }
 
     private void openCategorySelector() {
@@ -240,13 +344,7 @@ public class EventFormActivity extends AppCompatActivity {
             categories[x] = activisCategories[x].toString();
         }
 
-
-        if (fileImage != null) {
-            activis.createEvent(User.getUser(), title, description, startMillis, endMillis, TextUtils.join(",", categories), classificationView.getType(), location, fileImage, listener);
-
-        } else {
-            activis.createEvent(User.getUser(), title, description, startMillis, endMillis, TextUtils.join(",", categories), ActivisType.ASSEMBLY, location, listener);
-        }
+        activis.createEvent(User.getUser(), title, description, startMillis, endMillis, TextUtils.join(",", categories), ActivisType.ASSEMBLY, location, fileImage, imageUrl, listener);
     }
 
     public void showDatePicker(DatePickerDialog.OnDateSetListener listener) {
@@ -303,7 +401,7 @@ public class EventFormActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-            if (requestCode == PICK_IMAGE ) {
+            if (requestCode == PICK_IMAGE) {
                 if (data == null) {
                     Toast.makeText(this, R.string.open_file_error, Toast.LENGTH_LONG).show();
                     return;
@@ -313,10 +411,10 @@ public class EventFormActivity extends AppCompatActivity {
 
                 Uri selectedImage = data.getData();
                 try {
-                    Bitmap bitmapImage = Utils.decodeBitmap(this, selectedImage );
+                    Bitmap bitmapImage = Utils.decodeBitmap(this, selectedImage);
                     eventImage.setImageBitmap(bitmapImage);
                     fileImage = FileUtils.file(this, selectedImage);
-                } catch (FileNotFoundException | URISyntaxException e ) {
+                } catch (FileNotFoundException | URISyntaxException e) {
                     e.printStackTrace();
                     Toast.makeText(this, R.string.open_file_error, Toast.LENGTH_LONG).show();
                     pickText.setVisibility(View.VISIBLE);

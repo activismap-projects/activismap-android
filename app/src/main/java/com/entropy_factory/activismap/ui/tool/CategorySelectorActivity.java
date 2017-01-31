@@ -40,9 +40,9 @@ public class CategorySelectorActivity extends AppCompatActivity {
         final CategoryView categoryView = (CategoryView) findViewById(R.id.category_selector);
         TypeClassificationView typeClassificationView = (TypeClassificationView) findViewById(R.id.type_selector);
 
-        categoryView.setOnOptionClickListener(new AbstractOptionListener<OptionsView<com.entropy_factory.activismap.core.db.ActivisCategory>.Option<ActivisCategory>>() {
+        categoryView.setOnOptionClickListener(new AbstractOptionListener<CategoryView.Option<ActivisCategory>>() {
             @Override
-            public void onOptionClick(View v, OptionsView<ActivisCategory>.Option<ActivisCategory> option) {
+            public void onOptionClick(View v, CategoryView.Option<ActivisCategory> option) {
 
                 if (!itemClassificationView.containsCategory(option.object)) {
                     itemClassificationView.setCategory(option.object);
@@ -56,7 +56,7 @@ public class CategorySelectorActivity extends AppCompatActivity {
             }
 
             @Override
-            public boolean onOptionLongClick(View v, OptionsView<ActivisCategory>.Option<ActivisCategory> option) {
+            public boolean onOptionLongClick(View v, CategoryView.Option<ActivisCategory> option) {
                 openTypeTooltip(v, TextUtils.join("\n", getResources().getStringArray(option.object.getCategoryResource())));
                 return  true;
             }

@@ -53,10 +53,18 @@ public class Activis extends BaseActivis {
     }
 
     public void createEvent(User user, String title, String description, long sDate, long eDate, String categories, ActivisType type, LatLng location, ActivisListener<ActivisEvent> listener) {
-        createEvent(user, title, description, sDate, eDate, categories, type, location, null, listener);
+        createEvent(user, title, description, sDate, eDate, categories, type, location, null, null, listener);
     }
 
     public void createEvent(User user, String title, String description, long sDate, long eDate, String categories, ActivisType type, LatLng location, File image, final ActivisListener<ActivisEvent> listener) {
+        createEvent(user, title, description, sDate, eDate, categories, type, location, image, null, listener);
+    }
+
+    public void createEvent(User user, String title, String description, long sDate, long eDate, String categories, ActivisType type, LatLng location, String imageUrl, final ActivisListener<ActivisEvent> listener) {
+        createEvent(user, title, description, sDate, eDate, categories, type, location, null, imageUrl, listener);
+    }
+
+    public void createEvent(User user, String title, String description, long sDate, long eDate, String categories, ActivisType type, LatLng location, File image, String imageUrl, final ActivisListener<ActivisEvent> listener) {
 
         if (user == null) {
             openRegisterScreen();
@@ -79,9 +87,8 @@ public class Activis extends BaseActivis {
 
         CreateEventRequestBuilder cer = new CreateEventRequestBuilder(user.getCurrentCompany(), title, description, categories, type, location, sDate, eDate);
 
-        if (image != null) {
-            cer.setImage(image);
-        }
+        cer.setImage(image);
+        cer.setImageUrl(imageUrl);
 
         DialogResponseListener dListener = new DialogResponseListener(context, R.string.new_event, R.string.creating_event) {
             @Override
