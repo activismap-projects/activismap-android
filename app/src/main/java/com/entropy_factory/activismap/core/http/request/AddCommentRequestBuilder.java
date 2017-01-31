@@ -33,6 +33,18 @@ public class AddCommentRequestBuilder extends BasePostRequestBuilder {
     }
 
     @Override
+    protected Map<String, String> getHeaders() {
+        Map<String, String> headers = super.getHeaders();
+
+        User user = User.getUser();
+        if (user != null && !user.isAccessTokenExpired()) {
+            headers.put("Authorization", "Bearer " + user.getAccessToken());
+        }
+
+        return headers;
+    }
+
+    @Override
     protected Map<String, String> getParams() {
         Map<String, String> params = super.getParams();
         params.put("comment", comment);
