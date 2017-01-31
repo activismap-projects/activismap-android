@@ -47,11 +47,11 @@ public class EventActivity extends AppCompatActivity implements ActivisListener<
         @Override
         public void onResponse(ActivisResponse<Comment> response) {
             if (adapter == null) {
-                adapter = new CommentAdapter(EventActivity.this, response.getElements());
+                adapter = new CommentAdapter(EventActivity.this);
                 commentList.setAdapter(adapter);
-            } else {
-                adapter.addAll(response.getElements());
             }
+
+            adapter.addAll(response.getElements());
 
 
         }

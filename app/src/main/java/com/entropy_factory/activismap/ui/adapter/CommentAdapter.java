@@ -30,8 +30,8 @@ public class CommentAdapter extends RecyclerAdapter<CommentAdapter.BaseViewHolde
         }
     };
 
-    public CommentAdapter(Activity activity, List<Comment> list) {
-        super(activity, list);
+    public CommentAdapter(Activity activity) {
+        super(activity);
     }
 
     @Override
