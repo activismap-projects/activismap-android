@@ -10,6 +10,7 @@ import com.entropy_factory.activismap.R;
 import com.entropy_factory.activismap.core.db.ActivisEvent;
 import com.entropy_factory.activismap.util.TimeUtils;
 import com.entropy_factory.activismap.widget.ProfileImageView;
+import com.entropy_factory.activismap.widget.RemoteImageView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
@@ -40,7 +41,7 @@ public class ActivisEventMapAdapter implements GoogleMap.InfoWindowAdapter {
         TextView title = (TextView) v.findViewById(R.id.title);
         TextView desc = (TextView) v.findViewById(R.id.desc);
         TextView date = (TextView) v.findViewById(R.id.info_date);
-        ProfileImageView image = (ProfileImageView) v.findViewById(R.id.image);
+        RemoteImageView image = (RemoteImageView) v.findViewById(R.id.image);
 
         title.setText(event.getTitle());
         desc.setText(event.getDescription());
