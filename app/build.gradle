@@ -8,8 +8,8 @@ android {
         applicationId "com.entropy_factory.activismap"
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 1
-        versionName "0.1.0 Beta"
+        versionCode 2
+        versionName "0.1.1 Beta"
         vectorDrawables.useSupportLibrary = true;
     }
     buildTypes {
