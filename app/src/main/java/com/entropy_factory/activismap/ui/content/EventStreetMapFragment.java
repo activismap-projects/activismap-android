@@ -22,19 +22,10 @@ import com.entropy_factory.activismap.core.http.request.SearchActivisEventReques
 import com.entropy_factory.activismap.core.item.ActivisItem;
 import com.entropy_factory.activismap.core.item.ActivisTempEvent;
 import com.entropy_factory.activismap.core.receiver.ActivisEventReceiver;
-import com.entropy_factory.activismap.map.ActivisClusterManager;
-import com.entropy_factory.activismap.map.ActivisEventMapAdapter;
-import com.entropy_factory.activismap.map.ActivisEventMapRenderer;
 import com.entropy_factory.activismap.map.ActivisOverlay;
-import com.entropy_factory.activismap.ui.base.AdvanceMapFragment;
 import com.entropy_factory.activismap.ui.base.FragmentContext;
-import com.entropy_factory.activismap.ui.base.MapStateListener;
 import com.entropy_factory.activismap.widget.ClassificationView;
 import com.entropy_factory.activismap.widget.TypeClassificationView;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.Marker;
 import com.zanjou.http.request.Request;
 
 import org.json.JSONArray;

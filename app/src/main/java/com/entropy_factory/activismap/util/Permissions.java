@@ -11,6 +11,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.entropy_factory.activismap.R;
 
 import java.util.Arrays;
@@ -38,14 +40,14 @@ public class Permissions {
             Log.e(TAG, "PERMISSION_DENIED");
             if (ActivityCompat.shouldShowRequestPermissionRationale(context, permissions[0])) {
                 Log.e(TAG, "Showing explanation");
-                AlertDialog a = DialogFactory.alert(context, context.getString(R.string.enable_permissions), explanation);
-                a.setButton(DialogInterface.BUTTON_POSITIVE, context.getString(android.R.string.ok), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-
-                    }
-                });
+                MaterialDialog.Builder a = DialogFactory.alert(context, context.getString(R.string.enable_permissions), explanation);
+                a.positiveText(android.R.string.ok)
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        });
                 //a.show();
                 ActivityCompat.requestPermissions(context, permissions, requestCode);
             } else {

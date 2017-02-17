@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.entropy_factory.activismap.R;
 import com.entropy_factory.activismap.util.DialogFactory;
 import com.entropy_factory.activismap.util.GpsChecker;
@@ -260,7 +261,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private class SearchLocationTask extends AsyncTask<Void, Void, Void> {
-        private ProgressDialog pDialog;
+        private MaterialDialog pDialog;
         private boolean searchingLocation = true;
         Location mLastLocation;
 
@@ -275,7 +276,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = DialogFactory.progress(MapsActivity.this, R.string.location, R.string.searching_location);
+            pDialog = DialogFactory.progress(MapsActivity.this, R.string.location, R.string.searching_location).show();
             pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {

@@ -29,7 +29,7 @@ public class CategoryView extends OptionsView<ActivisCategory> {
 
     private void initialize(AttributeSet attrs) {
         clear();
-        ActivisCategory[] all = ActivisCategory.values();
+        ActivisCategory[] all = ActivisCategory.AVAILABLE;
 
         for (ActivisCategory ac : all) {
             addOption(ac.getIcon(), null, ac);

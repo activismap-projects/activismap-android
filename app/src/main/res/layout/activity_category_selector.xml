@@ -68,7 +68,8 @@
 
             <com.entropy_factory.activismap.widget.CategoryView
                 android:id="@+id/category_selector"
-                app:itemPadding="5dp"
+                app:itemSpacing="@dimen/category_item_spacing"
+                app:itemPadding="@dimen/category_item_padding"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

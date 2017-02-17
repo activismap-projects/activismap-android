@@ -20,7 +20,7 @@
             android:value="activismap.db"/>
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="1"/>
+            android:value="2"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBui4tbeKGx20M55c6bEu9CrlXZPrxeCfs"/>

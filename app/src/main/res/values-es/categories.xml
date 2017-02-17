@@ -1,107 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--AMNESTY, ANTICAPITALISM, ANTIMILITARISM, ASYLUM, FAIR_TRADE, EDUCATION, INTERNET,-->
-    <!--TERRITORY_DEFENSE, ECOLOGY, FEMINISM, PRO_INDEPENDENCE, INTEGRATION, MEMORY, ANIMAL_MOV, POLICY, HEALTH,-->
-    <!--SOLIDARITY, TREATED;-->
-    
+    <!--    AMNESTY, ANTICAPITALISM, ANTIFASCISM, ANTIMILITARISM, FAIR_TRADE, COOPERATIVE, EDUCATION,
+        TERRITORY_DEFENSE, ECOLOGY, FEMINISM, INTEGRATION, TREATED, MEMORY, ASYLUM, OCCUPATION, POLICY,
+        HEALTH, TRADE_UNIONISM, RURAL_WORLD, NATIONAL_LIBERTY, SOLIDARITY, INTERNET, ANIMAL_MOV, UNKNOWN;-->
+
     <string-array name="amnesty">
-        <item>Aministía social</item>
+        <item>Amnistía social</item>
         <item>Antirrepresión</item>
     </string-array>
-    
+
     <string-array name="anticapitalism">
         <item>Anticapitalismo</item>
-        <item>Postcapitalismo</item>
     </string-array>
-    
+
+    <string-array name="antifascism">
+        <item>Antifascismo</item>
+        <item>Antirracismo</item>
+    </string-array>
+
     <string-array name="antimilitarism">
         <item>Antimilitarismo</item>
     </string-array>
-    
-    <string-array name="asylum">
-        <item>Asilo</item>
-        <item>Migración</item>
-        <item>Refugiados</item>
-    </string-array>
-    
+
     <string-array name="fair_trade">
-        <item>Comercio justo</item> 
-        <item>Economía alternativa</item>
-        <item>Economía solidaria</item> 
-        <item>Monedas sociales</item> 
-        <item>Criptomonedas</item>
+        <item>Comerç just</item>
+        <item>Economía solidaria</item>
+    </string-array>
+
+    <string-array name="cooperative">
+        <item>Cooperativismo</item>
     </string-array>
 
     <string-array name="education">
-        <item>Educación</item>
+        <item>Educación popular</item>
         <item>Cultura</item>
-        <item>Identidad y lengua</item>
+        <item>Identidat y lengua</item>
     </string-array>
-    
-    <string-array name="internet">
-        <item>Cultura libre</item>
-        <item>DIY</item>
-        <item>Movimiento hacker</item>
-        <item>Seguridad e internet</item>
-        <item>Antivigilancia</item>
-    </string-array>
-    
+
     <string-array name="territory_defense">
         <item>Defensa del territorio</item>
-        <item>Movimientos barriales y vecinales</item>
+        <item>Movimiento barrial</item>
     </string-array>
-    
+
     <string-array name="ecology">
         <item>Ecología</item>
         <item>Mediambiente</item>
-        <item>Soberanía alimentaria</item>
     </string-array>
-    
+
     <string-array name="feminism">
         <item>Feminismo</item>
-        <item>Antipatriarcado</item>
+        <item>Diversitat afectiva</item>
+        <item>LGTBI</item>
     </string-array>
-    
-    <string-array name="pro_independence">
-        <item>Independentismo</item>
-        <item>Soberanía de los pueblos</item>
-    </string-array>
-    
+
     <string-array name="integration">
-        <item>Integración</item>
-        <item>Capacidades diferentes</item>
+        <item>Inclusión</item>
+        <item>Diversidat funcional</item>
     </string-array>
-    
+
+    <string-array name="treated">
+        <item>Lucha contra TTIP</item>
+        <item>Lucha contra CETA</item>
+        <item>Lucha contra TiSA</item>
+    </string-array>
+
     <string-array name="memory">
         <item>Memoria</item>
-        <item>Verdad y justicia</item>
-        <item>Desaparecidos</item>
+        <item>Verdad</item>
+        <item>Justicia</item>
     </string-array>
-    
-    <string-array name="animal_mov">
-        <item>Movimiento de liberación animal</item>
+
+    <string-array name="asylum">
+        <item>Migración</item>
+        <item>Refugiados</item>
+    </string-array>
+
+    <string-array name="occupation">
+        <item>Okupación</item>
+        <item>Derecho a la vivienda</item>
     </string-array>
 
     <string-array name="policy">
-        <item>Política</item>
         <item>Participación ciudadana</item>
         <item>Democracia directa</item>
     </string-array>
 
     <string-array name="health">
-        <item>Salud</item>
-        <item>Medicina alternativa</item>
+        <item>Salud holística</item>
+    </string-array>
+
+    <string-array name="trade_unionism">
+        <item>Sindicalismo</item>
+        <item>Derechos laborales</item>
+    </string-array>
+
+    <string-array name="rural_world">
+        <item>Soberanía alimentaria</item>
+        <item>Mundo rural</item>
+    </string-array>
+
+    <string-array name="national_liberty">
+        <item>Soberanía de los pueblos</item>
+        <item>Liberación nacional</item>
     </string-array>
 
     <string-array name="solidarity">
-        <item>Solidaridad internacionalista</item>
+        <item>Solidaridad intercionalista</item>
+        <item>Antiimperialismo</item>
     </string-array>
 
-    <string-array name="treated">
-        <item>Tratados TLCs</item>
-        <item>Tratados TTIP</item>
-        <item>Tratados CETA</item>
-        <item>Tratados TiSA</item>
+    <string-array name="internet">
+        <item>Tecnología</item>
+        <item>Internet</item>
+        <item>Hacker</item>
+    </string-array>
+
+    <string-array name="animal_mov">
+        <item>Antiespecismo</item>
+        <item>Veganismo</item>
+        <item>Animalismo</item>
     </string-array>
 </resources>

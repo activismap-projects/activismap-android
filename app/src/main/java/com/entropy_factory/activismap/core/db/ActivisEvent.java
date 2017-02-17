@@ -73,6 +73,9 @@ public class ActivisEvent extends BaseEntity implements ActivisItem {
     @Column(name = "subscribed")
     private boolean subscribed;
 
+    @Column(name = "liked")
+    private int liked;
+
     @Column(name = "company")
     private Company company;
 
@@ -225,6 +228,28 @@ public class ActivisEvent extends BaseEntity implements ActivisItem {
     @Override
     public boolean isSubscribed() {
         return subscribed;
+    }
+
+    public boolean isLiked() {
+        return liked >= 1;
+    }
+
+    public boolean isDisliked() {
+        return liked <= -1;
+    }
+
+    public boolean isLikeNeutral() {
+        return liked == 0;
+    }
+
+    public ActivisEvent setLiked(boolean liked) {
+        this.liked = liked ? 1 : -1;
+        return this;
+    }
+
+    public ActivisEvent setLiked(int liked) {
+        this.liked = liked;
+        return this;
     }
 
     public ActivisEvent setSubscribed(boolean subscribed) {
@@ -381,6 +406,10 @@ public class ActivisEvent extends BaseEntity implements ActivisItem {
 
         if (jsonObject.has("participants")) {
             activisEvent.setParticipants(jsonObject.getLong("participants"));
+        }
+
+        if (jsonObject.has("liked")) {
+            activisEvent.setLiked(jsonObject.getInt("liked"));
         }
 
         activisEvent.save();

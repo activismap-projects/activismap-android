@@ -1,32 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--ASSEMBLY, LEARNING, TALKING, MANIFESTATION, FESTIVAL, MARKET;-->
+    <!--ASSEMBLY, TALKING, FESTIVAL, POPULAR_PARTY, LEARNING, STRIKE, KAFETA, MANIFESTATION, MARKET, UNKNOWN;-->
+
     <string-array name="assembly">
         <item>Assemblea</item>
     </string-array>
 
-    <string-array name="learning">
-        <item>Aprenentatge</item>
-        <item>Curs</item>
-        <item>Taller</item>
-    </string-array>
-
     <string-array name="talking">
-        <item>Chat</item>
+        <item>Xarrada</item>
         <item>Ponència</item>
         <item>Debat</item>
     </string-array>
 
-    <string-array name="manifestation">
-        <item>Manisfestació</item>
-        <item>Concetració</item>
-        <item>Marxa</item>
-    </string-array>
-
     <string-array name="festival">
         <item>Concert</item>
-        <item>Revetlla</item>
+        <item>Revetla</item>
         <item>Cercavila</item>
+    </string-array>
+
+    <string-array name="popular_party">
+        <item>Festa popular</item>
+    </string-array>
+
+    <string-array name="learning">
+        <item>Formació</item>
+        <item>Curs</item>
+        <item>Taller</item>
+    </string-array>
+
+    <string-array name="strike">
+        <item>Vaga</item>
+    </string-array>
+
+    <string-array name="kafeta">
+        <item>Kafeta</item>
+    </string-array>
+
+    <string-array name="manifestation">
+        <item>Manifestació</item>
+        <item>Concentració</item>
+        <item>Marxa</item>
     </string-array>
 
     <string-array name="market">

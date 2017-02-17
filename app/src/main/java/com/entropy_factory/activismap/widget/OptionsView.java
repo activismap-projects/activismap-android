@@ -71,7 +71,7 @@ public class OptionsView<T> extends LinearLayout {
         options = new ArrayList<>();
 
         addOption(R.drawable.ic_amnesty, "Option 1");
-        addOption(R.drawable.ic_animal_mov, "Option 2");
+        addOption(R.drawable.ic_animal, "Option 2");
         addOption(R.drawable.ic_anticapitalism, "Option 3");
         addOption(R.drawable.ic_antimilitarism, "Option 4");
     }

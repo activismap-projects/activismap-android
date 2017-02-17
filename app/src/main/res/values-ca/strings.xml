@@ -13,7 +13,7 @@
     <string name="email">E-mail</string>
     <string name="enable_permissions">Habilitar permissos</string>
     <string name="event_description">Descripció de l\'esdeveniment</string>
-    <string name="event_radar">Rada d\'esdeveniments</string>
+    <string name="event_radar">Radar d\'esdeveniments</string>
     <string name="event_title">Títol de l\'esdeveniment</string>
     <string name="events_this_month">Aquest mes</string>
     <string name="events_this_week">Aquesta setmana</string>
@@ -59,4 +59,9 @@
     <string name="input_image_url">Introduïu l\'url de l\'imatge</string>
     <string name="internet_image">Imatge d\'Internet</string>
     <string name="select_an_option">Seleccioneu una opció</string>
+    <string name="all_categories">Totes les categories</string>
+    <string name="create_event">Crear esdeveniment</string>
+    <string name="app_slogan">*el map de l\'activisme en un sol clic</string>
+    <string name="open_event_details">Veure més</string>
+    <string name="search_location">Cercar una ubicació</string>
 </resources>

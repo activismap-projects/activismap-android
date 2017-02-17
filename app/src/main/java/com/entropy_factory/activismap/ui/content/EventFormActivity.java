@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.location.Address;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.entropy_factory.activismap.R;
@@ -123,7 +126,7 @@ public class EventFormActivity extends AppCompatActivity {
                     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
                         startMillis = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTimeInMillis();
                         Log.e(TAG, "START DATE = " + dayOfMonth + "/" + monthOfYear + "/" + year + " = " + startMillis);
-                        showTimePicker(new TimePickerDialog.OnTimeSetListener() {
+                        showTimePicker(true, new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
                                 startMillis += (hourOfDay * TimeUtils.HOUR) + (minute * TimeUtils.MINUTE) + (second * TimeUtils.SECOND);
@@ -145,7 +148,7 @@ public class EventFormActivity extends AppCompatActivity {
                     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
                         endMillis = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTimeInMillis();
                         Log.e(TAG, "END DATE = " + dayOfMonth + "/" + monthOfYear + "/" + year + " = " + endMillis);
-                        showTimePicker(new TimePickerDialog.OnTimeSetListener() {
+                        showTimePicker(false, new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
                                 endMillis += (hourOfDay * TimeUtils.HOUR) + (minute * TimeUtils.MINUTE) + (second * TimeUtils.SECOND);
@@ -199,7 +202,17 @@ public class EventFormActivity extends AppCompatActivity {
         View optionsView = LayoutInflater.from(this).inflate(R.layout.media_options_dialog, null);
         ImageResourceOptionsView optionsPanel = (ImageResourceOptionsView) optionsView.findViewById(R.id.options_panel);
 
-        final AlertDialog aDialog = DialogFactory.alert(this, R.string.select_an_option, optionsView);
+        MaterialDialog.Builder aDialog = DialogFactory.alert(this, R.string.select_an_option, optionsView);
+
+        aDialog.negativeText(android.R.string.cancel)
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        final MaterialDialog dialog = aDialog.show();
 
         optionsPanel.setOnOptionClickListener(new AbstractOptionListener<OptionsView.Option<Integer>>() {
             @Override
@@ -208,25 +221,15 @@ public class EventFormActivity extends AppCompatActivity {
                 switch (o) {
                     case 1:
                         IntentUtils.openGallery(EventFormActivity.this);
-                        aDialog.dismiss();
+                        dialog.dismiss();
                         break;
                     case 2:
                         inflateUrlImageDialog();
-                        aDialog.dismiss();
+                        dialog.dismiss();
 
                 }
             }
         });
-
-        aDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        aDialog.show();
-
-
     }
 
     private void inflateUrlImageDialog() {
@@ -259,25 +262,27 @@ public class EventFormActivity extends AppCompatActivity {
             }
         });
 
-        AlertDialog aDialog = DialogFactory.alert(this, R.string.internet_image, v);
-        aDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(android.R.string.ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                imageUrl = urlInput.getText().toString();
-                Glide.with(EventFormActivity.this).load(imageUrl)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .dontAnimate()
-                        .fitCenter().into(eventImage);
-            }
-        });
+        MaterialDialog.Builder aDialog = DialogFactory.alert(this, R.string.internet_image, v);
 
-        aDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
+        aDialog.positiveText(android.R.string.ok)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                        imageUrl = urlInput.getText().toString();
+                        Glide.with(EventFormActivity.this).load(imageUrl)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .dontAnimate()
+                                .fitCenter().into(eventImage);
+                    }
+                })
+                .negativeText(android.R.string.cancel)
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                }).show();
 
         aDialog.show();
     }
@@ -363,8 +368,8 @@ public class EventFormActivity extends AppCompatActivity {
         dpd.show(getFragmentManager(), "Datepickerdialog");
     }
 
-    public void showTimePicker(TimePickerDialog.OnTimeSetListener listener) {
-        showTimePicker(System.currentTimeMillis(), listener);
+    public void showTimePicker(boolean now, TimePickerDialog.OnTimeSetListener listener) {
+        showTimePicker(now ? System.currentTimeMillis() : 0, listener);
     }
 
     public void showTimePicker(long minDate, TimePickerDialog.OnTimeSetListener listener) {

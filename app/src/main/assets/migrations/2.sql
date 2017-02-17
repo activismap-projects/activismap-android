@@ -1,0 +1,1 @@
+ALTER TABLE activis_event ADD COLUMN liked INTEGER;

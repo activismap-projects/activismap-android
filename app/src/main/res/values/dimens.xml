@@ -2,7 +2,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="ttlm_default_padding">20dip</dimen>
-    <dimen name="ttlm_default_corner_radius">4dip</dimen>
-    <dimen name="ttlm_default_stroke_weight">1.3sp</dimen>
+
+    <dimen name="title_medium">16sp</dimen>
+    <dimen name="title_big">20sp</dimen>
 </resources>

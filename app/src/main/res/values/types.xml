@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--ASSEMBLY, LEARNING, TALKING, MANIFESTATION, FESTIVAL, MARKET;-->
+    <!--ASSEMBLY, TALKING, FESTIVAL, POPULAR_PARTY, LEARNING, STRIKE, KAFETA, MANIFESTATION, MARKET, UNKNOWN;-->
+
     <string-array name="assembly">
         <item>Assembly</item>
-    </string-array>
-
-    <string-array name="learning">
-        <item>Learning</item>
-        <item>Course</item>
-        <item>Workshop</item>
     </string-array>
 
     <string-array name="talking">
@@ -17,16 +12,34 @@
         <item>Discussion</item>
     </string-array>
 
-    <string-array name="manifestation">
-        <item>Manifestation</item>
-        <item>Concentration</item>
-        <item>March</item>
-    </string-array>
-
     <string-array name="festival">
         <item>Concert</item>
         <item>Vervain</item>
         <item>Passacaglia</item>
+    </string-array>
+
+    <string-array name="popular_party">
+        <item>Popular party</item>
+    </string-array>
+
+    <string-array name="learning">
+        <item>Learning</item>
+        <item>Course</item>
+        <item>Workshop</item>
+    </string-array>
+
+    <string-array name="strike">
+        <item>Strike</item>
+    </string-array>
+
+    <string-array name="kafeta">
+        <item>Kafeta</item>
+    </string-array>
+
+    <string-array name="manifestation">
+        <item>Manifestation</item>
+        <item>Concentration</item>
+        <item>March</item>
     </string-array>
 
     <string-array name="market">

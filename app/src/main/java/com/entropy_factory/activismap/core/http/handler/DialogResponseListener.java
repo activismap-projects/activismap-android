@@ -1,12 +1,15 @@
 package com.entropy_factory.activismap.core.http.handler;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.annotation.StringRes;
 import android.util.Log;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.entropy_factory.activismap.R;
+import com.entropy_factory.activismap.core.activis.Activis;
 import com.entropy_factory.activismap.util.DialogFactory;
 import com.zanjou.http.request.RequestStateListener;
 import com.zanjou.http.response.JsonResponseListener;
@@ -24,7 +27,7 @@ public abstract class DialogResponseListener extends JsonResponseListener implem
     private CharSequence waitingTitle;
     private CharSequence waitingMessage;
     private CharSequence errorMessage;
-    private ProgressDialog pDialog;
+    private MaterialDialog pDialog;
 
     @Override
     public void onErrorResponse(JSONObject jsonObject) throws JSONException {
@@ -47,8 +50,7 @@ public abstract class DialogResponseListener extends JsonResponseListener implem
     }
 
     public Dialog getProgressDialog(){
-        pDialog = DialogFactory.progress(context, waitingTitle, waitingMessage);
-        pDialog.setIcon(R.mipmap.ic_launcher);
+        pDialog = DialogFactory.progress(context, waitingTitle, waitingMessage).show();
         return pDialog;
     }
 

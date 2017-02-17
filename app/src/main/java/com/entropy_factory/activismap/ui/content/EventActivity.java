@@ -34,7 +34,6 @@ import com.entropy_factory.activismap.util.Utils;
 import com.entropy_factory.activismap.widget.ItemClassificationView;
 import com.entropy_factory.activismap.view.LikeView;
 import com.entropy_factory.activismap.widget.ProfileView;
-import com.entropy_factory.activismap.widget.ProfileImageView;
 import com.entropy_factory.activismap.widget.RemoteImageView;
 
 import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
@@ -128,7 +127,7 @@ public class EventActivity extends AppCompatActivity implements ActivisListener<
             Log.d(TAG, "EVENT ID = " + id);
         }
 
-        likeIcon.setText(likeStatus);
+
         likeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -239,15 +238,26 @@ public class EventActivity extends AppCompatActivity implements ActivisListener<
 
                                 switch (likeStatus) {
                                     case LikeStatus.LIKE:
-                                        client.like(item, EventActivity.this);
+                                        if (!item.isLiked()) {
+                                            client.like(item, EventActivity.this);
+                                            item.setLiked(true);
+                                        }
                                         break;
                                     case LikeStatus.DISLIKE:
-                                        client.dislike(item, EventActivity.this);
+                                        if (!item.isDisliked()) {
+                                            client.dislike(item, EventActivity.this);
+                                            item.setLiked(false);
+                                        }
                                         break;
                                     case LikeStatus.NEUTRAL:
-                                        client.neutralLike(item, EventActivity.this);
+                                        if (!item.isLikeNeutral()) {
+                                            client.neutralLike(item, EventActivity.this);
+                                            item.setLiked(0);
+                                        }
                                         break;
                                 }
+
+                                item.save();
                             }
                         })
                         .setBg(R.drawable.shape_white_rounded), 0)
@@ -281,6 +291,13 @@ public class EventActivity extends AppCompatActivity implements ActivisListener<
             });
 
             classification.setFrom(item);
+            if (item.isLiked()) {
+                likeIcon.setText(LikeStatus.LIKE);
+            } else if (item.isDisliked()) {
+                likeIcon.setText(LikeStatus.DISLIKE);
+            } else {
+                likeIcon.setText(LikeStatus.NEUTRAL);
+            }
 
 
         }

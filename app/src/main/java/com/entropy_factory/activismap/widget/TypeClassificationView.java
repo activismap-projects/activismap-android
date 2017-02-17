@@ -14,16 +14,16 @@ public class TypeClassificationView extends ClassificationView<ActivisType> {
 
     public TypeClassificationView(Context context) {
         super(context);
-        addAll(ActivisType.values());
+        addAll(ActivisType.AVAIALABLE);
     }
 
     public TypeClassificationView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        addAll(ActivisType.values());
+        addAll(ActivisType.AVAIALABLE);
     }
 
     public TypeClassificationView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        addAll(ActivisType.values());
+        addAll(ActivisType.AVAIALABLE);
     }
 }

@@ -19,6 +19,7 @@ public abstract class ActivisEventReceiver extends BroadcastReceiver {
     private static final String BASE_ACTION = ActivisEventReceiver.class.getPackage().getName();
     public static final String ACTION_REFRESH = BASE_ACTION + ".ACTION_REFRESH";
     public static final String ACTION_CHANGE_CATEGORY = BASE_ACTION + ".ACTION_CHANGE_CATEGORY";
+    public static final String ACTION_SELECT_ALL = BASE_ACTION + ".ACTION_SELECT_ALL";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -34,6 +35,8 @@ public abstract class ActivisEventReceiver extends BroadcastReceiver {
                     ac = (ActivisCategory) s;
                 }
                 onCategory(ac);
+            } else if (action.equals(ACTION_SELECT_ALL)) {
+                onSelectAll();
             }
         }
     }
@@ -43,6 +46,10 @@ public abstract class ActivisEventReceiver extends BroadcastReceiver {
     }
 
     public void onCategory(ActivisCategory category) {
+
+    }
+
+    public void onSelectAll() {
 
     }
 }

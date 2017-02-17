@@ -61,6 +61,10 @@ public abstract class FragmentContext extends Fragment {
         return getResources().getColor(id);
     }
 
+    public LayoutInflater getLayoutInflater() {
+        return getActivity().getLayoutInflater();
+    }
+
     public <T extends View> T  findViewById(int id) {
         return (T) getActivity().findViewById(id);
     }
