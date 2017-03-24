@@ -64,4 +64,18 @@
     <string name="app_slogan">*el map de l\'activisme en un sol clic</string>
     <string name="open_event_details">Veure més</string>
     <string name="search_location">Cercar una ubicació</string>
+    <string name="action_sign_in">Registrar-se</string>
+    <string name="coming_soon">Pròximament…</string>
+    <string name="action_sign_in_short">Registrar-se</string>
+    <string name="forgot_password">21/5000 Has oblidat la teva contrasenya?</string>
+    <string name="general">General</string>
+    <string name="has_account">Ja tens un compte? Inicia sessió.</string>
+    <string name="no_account">Encara no tens un compte? Registra\'t.</string>
+    <string name="notifications">Notificacions</string>
+    <string name="settings">Ajustos</string>
+    <string name="sign_up">Registra\'t</string>
+    <string name="type_a_location">Escriu un emplaçament</string>
+    <string name="enable_notifications">Activar notificacions</string>
+    <string name="my_location">La meva ubicació</string>
+    <string name="my_location_summary">Indica l\'ubicació per defecte que s\'utilitzarà per a mostrar els esdeveniments</string>
 </resources>

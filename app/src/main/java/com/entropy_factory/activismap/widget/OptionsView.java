@@ -8,6 +8,9 @@ import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -33,12 +36,66 @@ public class OptionsView<T> extends LinearLayout {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
-    private int optionsByPanel = 4;
+    private final OnTouchListener ITEM_LISTENER = new OnTouchListener() {
+
+        @Override
+        public boolean onTouch(View view, MotionEvent event) {
+            currentView = view;
+            return GESTURE_DETECTOR.onTouchEvent(event);
+        }
+    };
+
+    private final GestureDetector GESTURE_DETECTOR = new GestureDetector(new GestureDetector.SimpleOnGestureListener() {
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return true;
+        }
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+
+            Log.d(TAG, "View is pressed: " + currentView.isPressed());
+            if (isMultipleSelectionEnabled() && (!isSelectionsReached() || currentView.isPressed())) {
+                selections = currentView.isPressed() ? selections - 1 : selections + 1;
+
+                if (isMultipleSelectionEnabled()) {
+                    currentView.setPressed(!currentView.isPressed());
+                }
+
+                Option<T> option = (Option<T>) currentView.getTag();
+                if (onOptionClickListener != null) {
+                    onOptionClickListener.onOptionClick(currentView, option);
+                }
+
+                return true;
+            } else {
+                Option<T> option = (Option<T>) currentView.getTag();
+                if (onOptionClickListener != null) {
+                    onOptionClickListener.onOptionClick(currentView, option);
+                }
+            }
+
+            return false;
+        }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+            Option<T> option = (Option<T>) currentView.getTag();
+            if (onOptionClickListener != null) {
+                onOptionClickListener.onOptionLongClick(currentView, option);
+            }
+        }
+    });
+
     private List<Option<T>> options;
-    private int itemSpacing;
     private OnOptionClickListener<Option<T>> onOptionClickListener;
+    private View currentView;
+    private int optionsByPanel = 4;
+    private int itemSpacing;
     private int itemPadding;
-    private boolean multipleSelection;
+    private int maxSelection;
+    private int selections = 0;
 
     public OptionsView(Context context) {
         super(context);
@@ -63,7 +120,7 @@ public class OptionsView<T> extends LinearLayout {
 
             itemSpacing = a.getDimensionPixelSize(R.styleable.OptionsView_itemSpacing, Utils.convertDpToPixels(getContext(), 5));
             itemPadding = a.getDimensionPixelSize(R.styleable.OptionsView_itemPadding, 0);
-            multipleSelection = a.getBoolean(R.styleable.OptionsView_multipleSelection, false);
+            maxSelection = a.getInt(R.styleable.OptionsView_maxSelection, 1);
             a.recycle();
         }
 
@@ -112,7 +169,7 @@ public class OptionsView<T> extends LinearLayout {
                 optionLayout.setOrientation(VERTICAL);
                 optionLayout.setLayoutParams(optionParams);
                 optionLayout.setPadding(itemPadding, itemPadding , itemPadding, itemPadding);
-                if (multipleSelection) {
+                if (maxSelection > 1) {
                     optionLayout.setBackgroundResource(R.drawable.view_pressed_effect);
                 }
 
@@ -136,26 +193,9 @@ public class OptionsView<T> extends LinearLayout {
                 }
 
                 if (addOption) {
-                    optionLayout.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if (multipleSelection) {
-                                view.setPressed(!view.isPressed());
-                            }
-
-                            if (onOptionClickListener != null) {
-                                onOptionClickListener.onOptionClick(view, option);
-                            }
-                        }
-                    });
-
-                    optionLayout.setOnLongClickListener(new OnLongClickListener() {
-                        @Override
-                        public boolean onLongClick(View view) {
-                            return onOptionClickListener != null && onOptionClickListener.onOptionLongClick(view, option);
-
-                        }
-                    });
+                    optionLayout.setPressed(false);
+                    optionLayout.setOnTouchListener(ITEM_LISTENER);
+                    optionLayout.setTag(option);
                     rowLayout.addView(optionLayout);
                     option.id = Integer.valueOf(optionIndex);
                 }
@@ -225,6 +265,30 @@ public class OptionsView<T> extends LinearLayout {
 
     public int getOptionsCount() {
         return options.size();
+    }
+
+    public int getMaxSelection() {
+        return maxSelection;
+    }
+
+    public void setMaxSelection(int maxSelection) {
+        if (maxSelection < 1) {
+            maxSelection = 1;
+        }
+
+        this.maxSelection = maxSelection;
+    }
+
+    public boolean isMultipleSelectionEnabled() {
+        return maxSelection > 1;
+    }
+
+    public int getSelections() {
+        return selections;
+    }
+
+    public boolean isSelectionsReached() {
+        return selections == maxSelection;
     }
 
     public static class Option<T> {

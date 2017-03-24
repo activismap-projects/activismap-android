@@ -10,7 +10,7 @@
     <attr name="itemSpacing" format="dimension" />
     <attr name="itemSize" format="dimension" />
     <attr name="itemPadding" format="dimension" />
-    <attr name="multipleSelection" format="boolean"/>
+    <attr name="maxSelection" format="integer"/>
 
     <declare-styleable name="FontTextView">
         <attr name="font" format="enum">
@@ -95,7 +95,7 @@
     <declare-styleable name="OptionsView">
         <attr name="itemSpacing" />
         <attr name="itemPadding" />
-        <attr name="multipleSelection"/>
+        <attr name="maxSelection"/>
     </declare-styleable>
 
     <declare-styleable name="ProfileView">

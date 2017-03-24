@@ -13,7 +13,6 @@ import com.entropy_factory.activismap.core.http.handler.DialogResponseListener;
 import com.entropy_factory.activismap.core.http.request.CreateEventRequestBuilder;
 import com.entropy_factory.activismap.ui.tool.CompanyListActivity;
 import com.entropy_factory.activismap.ui.tool.LoginActivity;
-import com.entropy_factory.activismap.ui.tool.RegisterActivity;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONException;
@@ -24,7 +23,6 @@ import java.util.List;
 
 import static com.entropy_factory.activismap.ui.tool.CompanyListActivity.PICK_COMPANY;
 import static com.entropy_factory.activismap.ui.tool.LoginActivity.LOGIN_USER;
-import static com.entropy_factory.activismap.ui.tool.RegisterActivity.REGISTER_USER;
 
 /**
  * Created by Andersson G. Acosta on 20/01/17.
@@ -35,11 +33,6 @@ public class Activis extends BaseActivis {
 
     public Activis(Activity context) {
         super(context);
-    }
-
-    public void openRegisterScreen() {
-        Intent registerIntent = new Intent(context, RegisterActivity.class);
-        ((Activity) context).startActivityForResult(registerIntent, REGISTER_USER);
     }
 
     public void openLoginScreen() {
@@ -66,10 +59,7 @@ public class Activis extends BaseActivis {
 
     public void createEvent(User user, String title, String description, long sDate, long eDate, String categories, ActivisType type, LatLng location, File image, String imageUrl, final ActivisListener<ActivisEvent> listener) {
 
-        if (user == null) {
-            openRegisterScreen();
-            return;
-        } else if (user.isAccessTokenExpired()) {
+        if (user == null || user.isAccessTokenExpired()) {
             openLoginScreen();
             return;
         } else if (!user.hasCurrentCompany()) {

@@ -4,7 +4,7 @@
     <string name="day_at">%1$s %2$d, a les %3$s</string>
     <string name="month_at">%1$s %2$d de %3$s, a les %4$s</string>
     <string name="year_at">%1$s %2$d de %3$s, %4$d a les %5$s</string>
-    <string name="today_at">Avui, a les1$s</string>
+    <string name="today_at">Avui, a les %1$s</string>
     <string name="tomorrow_at">Demá, a les %1$s</string>
     <string name="date_construct">Del %1$s al %2$s</string>
 </resources>

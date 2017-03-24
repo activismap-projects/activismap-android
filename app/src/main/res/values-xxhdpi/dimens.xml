@@ -7,6 +7,15 @@
     <dimen name="title_medium">16sp</dimen>
     <dimen name="title_big">20sp</dimen>
 
+    <dimen name="type_item_size">33sp</dimen>
+    <dimen name="type_item_size_map">35sp</dimen>
+    <dimen name="type_item_padding">2sp</dimen>
     <dimen name="category_item_spacing">5sp</dimen>
     <dimen name="category_item_padding">0sp</dimen>
+
+    <dimen name="edit_text_size">16sp</dimen>
+    <dimen name="text_size">18sp</dimen>
+    <dimen name="material_text_size_small">20sp</dimen>
+    <dimen name="material_text_size_normal">25sp</dimen>
+    <dimen name="material_text_size_big">30sp</dimen>
 </resources>

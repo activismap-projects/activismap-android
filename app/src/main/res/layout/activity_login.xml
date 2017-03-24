@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              tools:context=".ui.tool.RegisterActivity"
-              android:padding="16dp">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.tool.LoginActivity"
+    android:padding="16dp"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:animateLayoutChanges="true">
 
         <RelativeLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="110dp">
+            android:layout_height="wrap_content">
 
             <com.entropy_factory.activismap.view.BesomTextView
                 android:text="ACTIVISMAP"
@@ -43,26 +42,62 @@
         </RelativeLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_person_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp">
+            app:errorEnabled="true">
+
+            <com.entropy_factory.activismap.view.FontEditText
+                android:id="@+id/person_name"
+                android:layout_width="match_parent"
+                android:hint="@string/person_name"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/edit_text_size"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:inputType="textPersonName"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:errorEnabled="true">
+
+            <com.entropy_factory.activismap.view.FontEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:textSize="@dimen/edit_text_size"
+                android:maxLines="1"
+                android:inputType="textEmailAddress"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
 
             <com.entropy_factory.activismap.view.FontEditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:hint="@string/username_or_email"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:singleLine="true"/>
+                android:textSize="@dimen/edit_text_size"
+                android:maxLines="1"/>
         </android.support.design.widget.TextInputLayout>
 
 
-
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/colorAccent"
+            app:errorEnabled="true">
 
             <com.entropy_factory.activismap.view.FontEditText
                 android:id="@+id/password"
@@ -70,40 +105,69 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:singleLine="true"/>
+                android:textSize="@dimen/edit_text_size"
+                android:maxLines="1" />
         </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
-
-        <com.entropy_factory.activismap.view.FontButton
-            android:id="@+id/btn_login"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_repassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login"
-            app:fontButton="black"
-            android:textColor="@color/white"
-            android:background="@drawable/btn_effect_primary_color"/>
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/colorAccent"
+            app:errorEnabled="true">
 
-        <com.entropy_factory.activismap.view.FontButton
-            android:id="@+id/btn_register"
+            <com.entropy_factory.activismap.view.FontEditText
+                android:id="@+id/repassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
+                android:textSize="@dimen/edit_text_size"
+                android:maxLines="1" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/register"
-            app:fontButton="black"
-            android:textColor="@color/white"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
 
-            android:layout_marginTop="20dp"
-            android:background="@drawable/btn_effect_primary_color"/>
+            <com.entropy_factory.activismap.view.FontTextView
+                android:id="@+id/account_question"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/has_account"
+                app:font="medium"
+                android:layout_weight="0.5"/>
+
+            <com.entropy_factory.activismap.view.FontTextView
+                android:id="@+id/forgot_password"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/forgot_password"
+                android:gravity="end"
+                app:font="medium"
+                android:layout_weight="0.5"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="bottom">
+
+            <com.entropy_factory.activismap.view.FontButton
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/action_sign_in"
+                android:layout_marginTop="5dp"
+                app:font="bold"
+                android:textColor="@android:color/white"
+                style="?android:textAppearanceSmall"
+                android:background="@drawable/btn_effect_primary_color"/>
+        </RelativeLayout>
+
     </LinearLayout>
-
-
-
-</RelativeLayout>
+</ScrollView>

@@ -32,14 +32,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.tool.MapsActivity"/>
         <activity
-            android:name=".ui.tool.RegisterActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_register"
-            android:launchMode="singleInstance"
-            android:theme="@style/FullscreenTheme">
-        </activity>
+            android:name=".ui.tool.MapsActivity"
+            android:theme="@style/FullscreenTheme"
+            android:label="@string/select_location"/>
+
         <activity
             android:name=".ui.tool.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -55,8 +52,12 @@
         <activity android:name=".ui.tool.CompanyListActivity">
         </activity>
         <activity android:name=".ui.tool.CategorySelectorActivity">
-        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        </activity>
+
+        <activity android:name=".ui.main.SettingsActivity"
+            android:label="@string/settings">
+        </activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>

@@ -5,6 +5,6 @@
     <string name="tomorrow_at">Mañana, a las %1$s</string>
     <string name="day_at">%1$s %2$d, a las %3$s</string>
     <string name="month_at">%1$s %2$d de %3$s, a las %4$s</string>
-    <string name="year_at">%1$s %2$d de %3$s, %4$d a las %5$</string>
+    <string name="year_at">%1$s %2$d de %3$s, %4$d a las %5$s</string>
     <string name="date_construct">De %1$s a %2$s</string>
 </resources>

@@ -9,9 +9,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.entropy_factory.activismap.R;
 import com.entropy_factory.activismap.core.db.ActivisCategory;
@@ -21,7 +23,6 @@ import com.entropy_factory.activismap.ui.content.EventFormActivity;
 import com.entropy_factory.activismap.ui.content.EventMapFragment;
 import com.entropy_factory.activismap.ui.content.EventStreetMapFragment;
 import com.entropy_factory.activismap.ui.tool.LoginActivity;
-import com.entropy_factory.activismap.ui.tool.RegisterActivity;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -34,7 +35,6 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import static com.entropy_factory.activismap.core.receiver.ActivisEventReceiver.ACTION_CHANGE_CATEGORY;
 import static com.entropy_factory.activismap.core.receiver.ActivisEventReceiver.ACTION_SELECT_ALL;
 import static com.entropy_factory.activismap.ui.tool.LoginActivity.LOGIN_USER;
-import static com.entropy_factory.activismap.ui.tool.RegisterActivity.REGISTER_USER;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -47,6 +47,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final int EVENT = 3;
     private static final int REGISTER = 4;
     private static final int ALL_CATEGORIES = 6;
+    private static final int SETTINGS = 7;
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -75,6 +76,7 @@ public class HomeActivity extends AppCompatActivity {
         final PrimaryDrawerItem calendar = new PrimaryDrawerItem().withIdentifier(CALENDAR).withName(R.string.my_events).withIcon(R.drawable.ic_menu_calendar).withIconTintingEnabled(true);
         final PrimaryDrawerItem event = new PrimaryDrawerItem().withIdentifier(EVENT).withName(R.string.add_event).withIcon(R.drawable.ic_menu_add_event).withIconTintingEnabled(true);
         final PrimaryDrawerItem register = new PrimaryDrawerItem().withIdentifier(REGISTER).withName(R.string.login).withIcon(R.drawable.ic_menu_register).withIconTintingEnabled(true);
+        final PrimaryDrawerItem settings = new PrimaryDrawerItem().withIdentifier(SETTINGS).withName(R.string.settings).withIcon(R.drawable.ic_settings).withIconTintingEnabled(true);
 
         SectionDrawerItem categories = new SectionDrawerItem().withDivider(true).withName(R.string.categories);
         SectionDrawerItem tools = new SectionDrawerItem().withDivider(true).withName(R.string.tools);
@@ -82,14 +84,14 @@ public class HomeActivity extends AppCompatActivity {
 
         final PrimaryDrawerItem allCategories = new PrimaryDrawerItem().withIdentifier(ALL_CATEGORIES).withName(R.string.all_categories).withIcon(R.drawable.ic_all);
 
-        IDrawerItem[] items = new IDrawerItem[activisCategories.length + 7];
+        IDrawerItem[] items = new IDrawerItem[activisCategories.length + 8];
         items[0] = map;
         items[1] = categories;
         items[2] = allCategories;
 
         for (int x = 0; x < activisCategories.length; x++) {
             ActivisCategory ac = activisCategories[x];
-            String name = getResources().getStringArray(ac.getCategoryResource())[0];
+            String name = TextUtils.join(", ", getResources().getStringArray(ac.getCategoryResource()));
             items[x+3] = new PrimaryDrawerItem().withIdentifier(ac.getIcon()).withName(name).withIcon(ac.getIcon());
         }
 
@@ -97,6 +99,7 @@ public class HomeActivity extends AppCompatActivity {
         items[activisCategories.length +4] = calendar;
         items[activisCategories.length +5] = event;
         items[activisCategories.length +6] = register;
+        items[activisCategories.length +7] = settings;
 
         DrawerBuilder db = new DrawerBuilder()
                 .withActivity(this)
@@ -114,7 +117,8 @@ public class HomeActivity extends AppCompatActivity {
         AccountHeaderBuilder ahb = new AccountHeaderBuilder();
 
         ahb.withActivity(this)
-                .withHeaderBackground(R.drawable.activismo);
+                .withHeaderBackground(R.drawable.drawer_background)
+                .withHeaderBackgroundScaleType(ImageView.ScaleType.CENTER_CROP);
 
         User u = User.getUser();
         if (User.getUser() != null) {
@@ -166,6 +170,10 @@ public class HomeActivity extends AppCompatActivity {
                 break;
             case ALL_CATEGORIES:
                 sendCategoryAction = true;
+                break;
+            case SETTINGS:
+                Intent settinsIntent = new Intent(this, SettingsActivity.class);
+                startActivity(settinsIntent);
                 break;
             case R.drawable.ic_amnesty:
                 sendCategoryAction = true;
@@ -260,7 +268,7 @@ public class HomeActivity extends AppCompatActivity {
                 ac = ActivisCategory.ANIMAL_MOV;
                 break;
             case REGISTER:
-                Intent registerIntent = new Intent(this, RegisterActivity.class);
+                Intent registerIntent = new Intent(this, LoginActivity.class);
                 startActivity(registerIntent);
         }
 
@@ -279,10 +287,6 @@ public class HomeActivity extends AppCompatActivity {
         return instance;
     }
 
-    public void openRegisterScreen() {
-        Intent registerIntent = new Intent(this, RegisterActivity.class);
-        startActivityForResult(registerIntent, REGISTER_USER);
-    }
 
     public void openLoginScreen() {
         Intent registerIntent = new Intent(this, LoginActivity.class);

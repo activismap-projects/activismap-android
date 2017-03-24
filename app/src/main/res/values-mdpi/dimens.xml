@@ -3,9 +3,10 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="title_small">15sp</dimen>
-    <dimen name="title_medium">25sp</dimen>
-    <dimen name="title_big">35sp</dimen>
+    <dimen name="title_small">10sp</dimen>
+    <dimen name="title_medium">18sp</dimen>
+    <dimen name="title_big">20sp</dimen>
+
 
     <dimen name="type_item_size">30sp</dimen>
     <dimen name="type_item_size_map">30sp</dimen>
@@ -13,9 +14,9 @@
     <dimen name="category_item_spacing">2sp</dimen>
     <dimen name="category_item_padding">0sp</dimen>
 
-    <dimen name="edit_text_size">16sp</dimen>
-    <dimen name="text_size">18sp</dimen>
-    <dimen name="material_text_size_small">20sp</dimen>
-    <dimen name="material_text_size_normal">25sp</dimen>
-    <dimen name="material_text_size_big">30sp</dimen>
+    <dimen name="edit_text_size">14sp</dimen>
+    <dimen name="text_size">16sp</dimen>
+    <dimen name="material_text_size_small">15sp</dimen>
+    <dimen name="material_text_size_normal">20sp</dimen>
+    <dimen name="material_text_size_big">25sp</dimen>
 </resources>

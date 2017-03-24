@@ -63,7 +63,6 @@ import static com.entropy_factory.activismap.ui.tool.CategorySelectorActivity.SE
 import static com.entropy_factory.activismap.ui.tool.CompanyListActivity.PICK_COMPANY;
 import static com.entropy_factory.activismap.ui.tool.LoginActivity.LOGIN_USER;
 import static com.entropy_factory.activismap.ui.tool.MapsActivity.PICK_LOCATION;
-import static com.entropy_factory.activismap.ui.tool.RegisterActivity.REGISTER_USER;
 import static com.entropy_factory.activismap.util.IntentUtils.PICK_IMAGE;
 
 
@@ -348,7 +347,7 @@ public class EventFormActivity extends AppCompatActivity {
             categories[x] = activisCategories[x].toString();
         }
 
-        activis.createEvent(User.getUser(), title, description, startMillis, endMillis, TextUtils.join(",", categories), ActivisType.ASSEMBLY, location, fileImage, imageUrl, listener);
+        activis.createEvent(User.getUser(), title, description, startMillis, endMillis, TextUtils.join(",", categories), classificationView.getType(), location, fileImage, imageUrl, listener);
     }
 
     public void showDatePicker(DatePickerDialog.OnDateSetListener listener) {
@@ -417,7 +416,9 @@ public class EventFormActivity extends AppCompatActivity {
                 try {
                     Bitmap bitmapImage = Utils.decodeBitmap(this, selectedImage);
                     eventImage.setImageBitmap(bitmapImage);
+                    Log.e(TAG, selectedImage.toString());
                     fileImage = FileUtils.file(this, selectedImage);
+                    Log.d(TAG, "File " + fileImage.getAbsolutePath());
                 } catch (FileNotFoundException | URISyntaxException e) {
                     e.printStackTrace();
                     Toast.makeText(this, R.string.open_file_error, Toast.LENGTH_LONG).show();
@@ -427,18 +428,13 @@ public class EventFormActivity extends AppCompatActivity {
             } else if (requestCode == PICK_LOCATION) {
                 Bundle extras = data.getExtras();
                 location = new LatLng(extras.getDouble("latitude"), extras.getDouble("longitude"));
-                Address address = data.getExtras().getParcelable("address");
+                String address = data.getExtras().getString("address", "");
 
-                StringBuilder strReturnedAddress = new StringBuilder();
-                for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
-                    strReturnedAddress.append(address.getAddressLine(i)).append(" ");
-                }
-
-                Log.e(TAG, "Address: " + strReturnedAddress.toString());
-                if (strReturnedAddress.toString().isEmpty()) {
+                Log.e(TAG, "Address: " + address.toString());
+                if (address.isEmpty()) {
                     locationView.setText(location.latitude + ", " + location.longitude);
                 } else {
-                    locationView.setText(strReturnedAddress.toString());
+                    locationView.setText(address);
                 }
             } else if (requestCode == SELECT_CLASSIFICATION) {
                 Bundle extras = data.getExtras();
@@ -472,7 +468,7 @@ public class EventFormActivity extends AppCompatActivity {
                 classificationView.setVisibility(showClassification ? View.VISIBLE : View.GONE);
                 openSelector.setVisibility(showClassification ? View.GONE : View.VISIBLE);
 
-            } else if (requestCode == LOGIN_USER || requestCode == REGISTER_USER || requestCode == PICK_COMPANY) {
+            } else if (requestCode == LOGIN_USER || requestCode == PICK_COMPANY) {
                 processSend();
             }
         }

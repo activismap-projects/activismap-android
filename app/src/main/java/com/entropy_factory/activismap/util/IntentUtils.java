@@ -8,6 +8,8 @@ import android.provider.MediaStore;
 import com.entropy_factory.activismap.ui.tool.MapsActivity;
 import com.google.android.gms.maps.model.LatLng;
 
+import static com.entropy_factory.activismap.ui.tool.MapsActivity.DEFAULT_POINT;
+
 /**
  * Created by ander on 30/09/16.
  */
@@ -31,7 +33,15 @@ public class IntentUtils {
     }
 
     public static void openMap(Activity activity) {
+        openMap(activity, null);
+    }
+
+    public static void openMap(Activity activity, LatLng defaultPoint) {
         Intent mapIntent = new Intent(activity, MapsActivity.class);
+
+        if (defaultPoint != null) {
+            mapIntent.putExtra(DEFAULT_POINT, defaultPoint);
+        }
         activity.startActivityForResult(mapIntent, MapsActivity.PICK_LOCATION);
     }
 

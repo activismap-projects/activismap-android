@@ -46,10 +46,8 @@ public class CategorySelectorActivity extends AppCompatActivity {
 
                 if (!itemClassificationView.containsCategory(option.object)) {
                     itemClassificationView.setCategory(option.object);
-                    v.setPressed(true);
                 } else {
                     itemClassificationView.removeCategory(option.object);
-                    v.setPressed(false);
                 }
 
                 super.onOptionClick(v, option);

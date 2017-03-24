@@ -2,6 +2,7 @@ package com.entropy_factory.activismap.ui.content;
 
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
@@ -13,6 +14,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +29,7 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.entropy_factory.activismap.R;
+import com.entropy_factory.activismap.app.Configuration;
 import com.entropy_factory.activismap.core.activis.BaseActivis;
 import com.entropy_factory.activismap.core.activis.ActivisListener;
 import com.entropy_factory.activismap.core.activis.ActivisResponse;
@@ -69,6 +72,7 @@ import java.util.List;
 import java.util.Locale;
 
 import eu.davidea.flexibleadapter.FlexibleAdapter;
+import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 
 import static com.entropy_factory.activismap.core.receiver.ActivisEventReceiver.ACTION_CHANGE_CATEGORY;
 import static com.entropy_factory.activismap.core.receiver.ActivisEventReceiver.ACTION_SELECT_ALL;
@@ -116,6 +120,7 @@ public class EventMapFragment extends FragmentContext implements OnMapReadyCallb
     private long endDate;
     private List<ActivisItem> persistentEvents;
     private boolean panelsVisible = true;
+    private boolean setLocationPreference = true;
 
     @Override
     public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -142,7 +147,9 @@ public class EventMapFragment extends FragmentContext implements OnMapReadyCallb
 
             @Override
             public boolean onClassificationLongClick(View v, ActivisType item) {
-                return false;
+                String text = TextUtils.join(", ", item.getActivisClassification());
+                openTypeTooltip(v, text);
+                return true;
             }
         });
 
@@ -162,6 +169,19 @@ public class EventMapFragment extends FragmentContext implements OnMapReadyCallb
         });
 
         search();
+    }
+
+    private void openTypeTooltip(View v, String text) {
+        SimpleTooltip st = new SimpleTooltip.Builder(getActivity())
+                .text(text)
+                .textColor(Color.WHITE)
+                .backgroundColor(getResources().getColor(R.color.colorSecondaryHint))
+                .animated(true)
+                .anchorView(v)
+                .modal(true)
+                .arrowColor(getResources().getColor(R.color.colorSecondaryHint))
+                .build();
+        st.show();
     }
 
     @Override
@@ -216,6 +236,14 @@ public class EventMapFragment extends FragmentContext implements OnMapReadyCallb
             if (persistentEvents != null && !persistentEvents.isEmpty()) {
                 setEventsOnMap(persistentEvents);
                 persistentEvents.clear();
+            }
+
+            if (setLocationPreference) {
+                LatLng myLocation = Configuration.getInstance().getLocation();
+                if (myLocation != null) {
+                    moveCamera(myLocation, 7);
+                }
+                setLocationPreference = false;
             }
         }
 
@@ -325,42 +353,48 @@ public class EventMapFragment extends FragmentContext implements OnMapReadyCallb
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        long id = Long.parseLong(marker.getTitle());
-        final ActivisEvent event = ActivisEvent.findByRemoteId(id);
+        try {
+            long id = Long.parseLong(marker.getTitle());
+            final ActivisEvent event = ActivisEvent.findByRemoteId(id);
 
-        View v = getLayoutInflater().inflate(R.layout.map_event_info, null);
-        TextView title = (TextView) v.findViewById(R.id.title);
-        TextView desc = (TextView) v.findViewById(R.id.desc);
-        TextView date = (TextView) v.findViewById(R.id.info_date);
-        RemoteImageView image = (RemoteImageView) v.findViewById(R.id.image);
+            View v = getLayoutInflater().inflate(R.layout.map_event_info, null);
+            TextView title = (TextView) v.findViewById(R.id.title);
+            TextView desc = (TextView) v.findViewById(R.id.desc);
+            TextView date = (TextView) v.findViewById(R.id.info_date);
+            RemoteImageView image = (RemoteImageView) v.findViewById(R.id.image);
 
-        title.setText(event.getTitle());
-        desc.setText(event.getDescription());
-        date.setText(TimeUtils.getTimeString(event.getStartDate()) + " - " + TimeUtils.getTimeString(event.getEndDate()));
-        image.loadRemoteImage(event.getImageUrl(), 0);
+            title.setText(event.getTitle());
+            desc.setText(event.getDescription());
+            date.setText(TimeUtils.getTimeString(event.getStartDate()) + " - " + TimeUtils.getTimeString(event.getEndDate()));
+            image.loadRemoteImage(event.getImageUrl(), 0);
 
-        MaterialDialog.Builder aDialog = DialogFactory.alert(getActivity(), event.getTitle(), v);
-        aDialog.positiveText(R.string.open_event_details)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        dialog.dismiss();
-                        Intent eventItent = new Intent(getActivity(), EventActivity.class);
-                        eventItent.putExtra("id", event.getServerId());
-                        Log.d(TAG, "EVENT ID = " + event.getServerId());
-                        startActivity(eventItent);
-                    }
-                })
-                .negativeText(android.R.string.cancel)
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
+            MaterialDialog.Builder aDialog = DialogFactory.alert(getActivity(), event.getTitle(), v);
+            aDialog.positiveText(R.string.open_event_details)
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            dialog.dismiss();
+                            Intent eventItent = new Intent(getActivity(), EventActivity.class);
+                            eventItent.putExtra("id", event.getServerId());
+                            Log.d(TAG, "EVENT ID = " + event.getServerId());
+                            startActivity(eventItent);
+                        }
+                    })
+                    .negativeText(android.R.string.cancel)
+                    .onNegative(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+        } catch (Exception ignore) {
+        } finally {
+            moveCamera(marker.getPosition(), 7);
+        }
 
-        moveCamera(marker.getPosition(), map.getCameraPosition().zoom);
+
+
         return true;
     }
 

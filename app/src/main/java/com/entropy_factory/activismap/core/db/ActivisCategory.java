@@ -43,7 +43,7 @@ public enum ActivisCategory implements ActivisView {
             case INTEGRATION:
                 return R.drawable.ic_integration;
             case TREATED:
-                return R.drawable.ic_treated;
+                return R.drawable.ic_anti_tlc_fight;
             case MEMORY:
                 return R.drawable.ic_memory;
             case ASYLUM:

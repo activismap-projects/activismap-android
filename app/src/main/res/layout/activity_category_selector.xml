@@ -46,8 +46,8 @@
         android:id="@+id/type_selector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemSize="45dp"
-        app:itemPadding="5dp"
+        app:itemSize="@dimen/type_item_size"
+        app:itemPadding="@dimen/type_item_padding"
         android:layout_marginBottom="10dp"/>
 
 
@@ -71,7 +71,8 @@
                 app:itemSpacing="@dimen/category_item_spacing"
                 app:itemPadding="@dimen/category_item_padding"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                app:maxSelection="3"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

@@ -64,4 +64,18 @@
     <string name="app_slogan">*el mapa del activismo en un solo clic</string>
     <string name="open_event_details">Ver más</string>
     <string name="search_location">Buscar ubicación</string>
+    <string name="coming_soon">Muy pronto…</string>
+    <string name="action_sign_in">Registrarse</string>
+    <string name="action_sign_in_short">Registrarse</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="general">General</string>
+    <string name="has_account">Ya tienes una cuenta? Inicia sesión.</string>
+    <string name="no_account">¿Aún no tiene una cuenta? Regístrate.</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="settings">Ajustes</string>
+    <string name="sign_up">Regístrate</string>
+    <string name="type_a_location">Escribe una ubicación</string>
+    <string name="enable_notifications">Habilitar notificaciones</string>
+    <string name="my_location">Mi ubicación</string>
+    <string name="my_location_summary">Indica la ubicación por defecto que se usará para mostrate los eventos</string>
 </resources>

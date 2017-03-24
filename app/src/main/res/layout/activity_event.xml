@@ -35,7 +35,7 @@
                 <com.entropy_factory.activismap.widget.RemoteImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/city"
+                    android:src="@drawable/event_default_img"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
                     android:id="@+id/event_image"/>

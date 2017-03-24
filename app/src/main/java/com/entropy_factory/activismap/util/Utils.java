@@ -156,4 +156,6 @@ public class Utils {
         return ActivisApplication.INSTANCE.getString(resId, numString);
     }
 
+
+
 }

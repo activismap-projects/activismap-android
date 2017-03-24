@@ -14,14 +14,23 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.entropy_factory.activismap.R;
+import com.entropy_factory.activismap.ui.adapter.AddressAdapter;
+import com.entropy_factory.activismap.ui.adapter.item.AddressItem;
 import com.entropy_factory.activismap.util.DialogFactory;
 import com.entropy_factory.activismap.util.GpsChecker;
 import com.entropy_factory.activismap.util.Permissions;
@@ -34,23 +43,31 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import eu.davidea.flexibleadapter.FlexibleAdapter;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     public static final int PICK_LOCATION = 365;
+    public static final String DEFAULT_POINT = "defaut_point";
+
     private static final String TAG = "MapsActivity";
 
     private LocationManager locationManager;
     private GoogleApiClient mGoogleApiClient;
     private GoogleMap map;
     private LatLng position;
-    private Address address;
+    private String address;
+    private AsyncTask locationTask;
+    private LatLng defaultPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +76,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         buildGoogleApiClient();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        defaultPoint = getIntent().getParcelableExtra(DEFAULT_POINT);
+
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMapAsync(this);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -91,6 +110,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     setResult(RESULT_OK, data);
                     finish();
                 }
+            }
+        });
+
+        View searchLocation = findViewById(R.id.search_location);
+        searchLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLocationDialog();
             }
         });
 
@@ -135,6 +162,122 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         map.addMarker(new MarkerOptions()
                 .position(position)
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+    }
+
+    private void showLocationDialog() {
+        View v = getLayoutInflater().inflate(R.layout.location_dialog, null);
+
+        final SwipeRefreshLayout srl = (SwipeRefreshLayout) v.findViewById(R.id.location_refresh);
+        srl.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark);
+        RecyclerView list = (RecyclerView) v.findViewById(R.id.location_list);
+        EditText locationText = (EditText) v.findViewById(R.id.location_name);
+
+        final AddressAdapter addressAdapter = new AddressAdapter(new ArrayList<AddressItem>(), this);
+        list.setLayoutManager(new LinearLayoutManager(this));
+        list.setAdapter(addressAdapter);
+
+        MaterialDialog.Builder lDialog = DialogFactory.alert(this, R.string.search_location, v);
+        lDialog.negativeText(android.R.string.cancel)
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        locationText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                searchLocations(charSequence.toString(), addressAdapter, srl);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        final MaterialDialog dialog = lDialog.show();
+
+        addressAdapter.setOnItemClickListener(new FlexibleAdapter.OnItemClickListener() {
+            @Override
+            public boolean onItemClick(int i) {
+                AddressItem addressItem = addressAdapter.getItem(i);
+                Address address = addressItem.getAddress();
+
+                if (address.hasLatitude() && address.hasLongitude()) {
+                    LatLng position = new LatLng(address.getLatitude(), address.getLongitude());
+
+                    StringBuilder sb = new StringBuilder();
+                    for (int x = 0; x < address.getMaxAddressLineIndex()+1; x++) {
+                        sb.append(address.getAddressLine(x)).append(", ");
+                    }
+
+                    String addressString = sb.toString();
+                    if (!addressString.isEmpty()) {
+                        addressString = addressString.substring(0, addressString.length() -2);
+                    }
+
+                    moveCamera(addressString, position, 10);
+                }
+                dialog.dismiss();
+                return true;
+            }
+        });
+    }
+
+    private void searchLocations(final String search, final AddressAdapter adapter, final SwipeRefreshLayout srl) {
+        if (locationTask != null && !locationTask.isCancelled()) {
+            locationTask.cancel(true);
+        }
+
+        locationTask = new AsyncTask<Void, Void, List<Address>>() {
+            @Override
+            protected void onPreExecute() {
+                srl.setRefreshing(true);
+            }
+
+            @Override
+            protected void onPostExecute(List<Address> addresses) {
+                srl.setRefreshing(false);
+
+                if (addresses != null) {
+                    adapter.clear();
+                    adapter.addItems(0, AddressItem.build(addresses));
+                }
+            }
+
+            @Override
+            protected List<Address> doInBackground(Void... voids) {
+                try {
+                    final Geocoder gc = new Geocoder(MapsActivity.this, Locale.getDefault());
+                    return gc.getFromLocationName(search, 20);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+    private void moveCamera(String address, LatLng position, float zoom) {
+        CameraPosition cp = new CameraPosition.Builder()
+                .target(position)
+                .zoom(zoom)
+                .tilt(map.getCameraPosition().tilt)
+                .bearing(map.getCameraPosition().bearing)
+                .build();
+
+        this.position = position;
+        this.address = address;
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(cp));
+        map.clear();
+        map.addMarker(new MarkerOptions().position(position).title(address));
     }
 
     @Override
@@ -188,39 +331,39 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 setLocation(latLng);
             }
         });
+
+        if (defaultPoint != null) {
+            String address = getLocationAddress(defaultPoint);
+            moveCamera(address, defaultPoint, 7);
+        }
+    }
+
+    public String getLocationAddress(LatLng latLng) {
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            for (Address a : addresses) {
+                Log.e(TAG, "Address: " + a.toString());
+            }
+            if (addresses.size() > 0) {
+                Address address = addresses.get(0);
+                StringBuilder strReturnedAddress = new StringBuilder();
+                for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
+                    strReturnedAddress.append(address.getAddressLine(i)).append(" ");
+                }
+
+                return  strReturnedAddress.toString();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public void setLocation(LatLng latLng) {
-        Log.e(TAG, "LOCATION = " + latLng.toString());
-        if (map != null) {
-            map.clear();
-            position = latLng;
-
-            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-            String title = getString(R.string.searching_location);
-            try {
-                List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-                for (Address a : addresses) {
-                    Log.e(TAG, "Address: " + a.toString());
-                }
-                if (addresses.size() > 0) {
-                    address = addresses.get(0);
-                    StringBuilder strReturnedAddress = new StringBuilder();
-                    for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
-                        strReturnedAddress.append(address.getAddressLine(i)).append(" ");
-                    }
-
-                    title = strReturnedAddress.toString();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            map.addMarker(new MarkerOptions().position(latLng).title(title).visible(true));
-            CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(latLng, 15);
-            map.moveCamera(cu);
-        }
-
+        String title = getLocationAddress(latLng);
+        moveCamera(title, latLng, 15);
     }
 
     @Override

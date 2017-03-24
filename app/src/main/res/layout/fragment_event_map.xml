@@ -34,8 +34,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        app:itemSize="@dimen/type_item_size_map"
         app:itemPadding="5dp"
-        app:itemSize="35dp"
         android:orientation="horizontal"
         android:layout_centerHorizontal="true">
     </com.entropy_factory.activismap.widget.TypeClassificationView>

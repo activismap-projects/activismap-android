@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.tool.MapsActivity">
 
     <fragment android:id="@+id/map"
@@ -14,31 +15,36 @@
               android:layout_height="match_parent"/>
 
     <com.entropy_factory.activismap.view.MaterialTextView
+        android:layout_above="@+id/handle_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/text_pressed_effect"
         android:text="\ue1b3"
         android:textSize="50dp"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentRight="false"
-        android:layout_alignRight="@+id/map"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
         android:id="@+id/catch_location"
-        android:layout_above="@+id/handle_location"/>
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp" />
 
     <com.entropy_factory.activismap.view.MaterialTextView
+        android:id="@+id/handle_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/text_pressed_effect"
         android:text="\ue8b4"
         android:textSize="50dp"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentRight="false"
-        android:layout_alignBottom="@+id/map"
-        android:layout_alignRight="@+id/map"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="65dp"
-        android:id="@+id/handle_location"/>
+        android:layout_above="@+id/search_location"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"/>
+
+    <com.entropy_factory.activismap.view.MaterialTextView
+        android:id="@+id/search_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_pressed_effect"
+        android:text="\ue8b6"
+        android:textSize="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"/>
 
 </RelativeLayout>
