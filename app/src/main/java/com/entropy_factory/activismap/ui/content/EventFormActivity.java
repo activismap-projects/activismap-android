@@ -125,7 +125,11 @@ public class EventFormActivity extends AppCompatActivity {
                     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
                         startMillis = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTimeInMillis();
                         Log.e(TAG, "START DATE = " + dayOfMonth + "/" + monthOfYear + "/" + year + " = " + startMillis);
-                        showTimePicker(true, new TimePickerDialog.OnTimeSetListener() {
+
+                        Calendar c = Calendar.getInstance();
+                        boolean now = c.get(Calendar.YEAR) == year && c.get(Calendar.MONTH) == monthOfYear && c.get(Calendar.DAY_OF_MONTH) == dayOfMonth;
+
+                        showTimePicker(now, new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
                                 startMillis += (hourOfDay * TimeUtils.HOUR) + (minute * TimeUtils.MINUTE) + (second * TimeUtils.SECOND);
