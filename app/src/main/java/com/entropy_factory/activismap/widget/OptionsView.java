@@ -136,7 +136,7 @@ public class OptionsView<T> extends LinearLayout {
     private void invalidateView() {
         removeAllViews();
 
-        int rows = (int) Math.ceil(options.size() / optionsByPanel);
+        int rows = (int) Math.ceil(options.size() / (optionsByPanel * 1.0));
 
         int rowOrientation = getOrientation() == VERTICAL ? HORIZONTAL : VERTICAL;
         LayoutParams rowParams;
