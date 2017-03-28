@@ -25,7 +25,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBui4tbeKGx20M55c6bEu9CrlXZPrxeCfs"/>
 
-        <activity android:name=".ui.main.HomeActivity">
+        <activity android:name=".ui.main.HomeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -35,27 +36,37 @@
         <activity
             android:name=".ui.tool.MapsActivity"
             android:theme="@style/FullscreenTheme"
-            android:label="@string/select_location"/>
+            android:label="@string/select_location"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.tool.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_register"
             android:launchMode="singleInstance"
             android:theme="@style/FullscreenTheme">
         </activity>
         <activity
             android:name=".ui.content.EventActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".ui.content.EventFormActivity"/>
-        <activity android:name=".ui.tool.CompanyListActivity">
+
+        <activity android:name=".ui.content.EventFormActivity"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.tool.CompanyListActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ui.tool.CategorySelectorActivity">
+
+        <activity android:name=".ui.tool.CategorySelectorActivity"
+                  android:screenOrientation="portrait">
         </activity>
 
         <activity android:name=".ui.main.SettingsActivity"
-            android:label="@string/settings">
+                  android:label="@string/settings"
+                  android:screenOrientation="portrait">
         </activity>
 
         <meta-data
