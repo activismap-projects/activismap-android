@@ -119,7 +119,7 @@ public class EventFormActivity extends AppCompatActivity {
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDatePicker(new DatePickerDialog.OnDateSetListener() {
+                showDatePicker(endMillis, new DatePickerDialog.OnDateSetListener() {
 
                     @Override
                     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
@@ -359,6 +359,7 @@ public class EventFormActivity extends AppCompatActivity {
     }
 
     public void showDatePicker(long minDate, DatePickerDialog.OnDateSetListener listener) {
+        minDate = minDate > 0 ? minDate : System.currentTimeMillis();
         Calendar now = new GregorianCalendar();
         now.setTime(new Date(minDate));
         DatePickerDialog dpd = DatePickerDialog.newInstance(
