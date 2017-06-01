@@ -131,7 +131,7 @@ public class EventFormActivity extends AppCompatActivity {
 
                         showTimePicker(now, new TimePickerDialog.OnTimeSetListener() {
                             @Override
-                            public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+                            public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
                                 startMillis += (hourOfDay * TimeUtils.HOUR) + (minute * TimeUtils.MINUTE) + (second * TimeUtils.SECOND);
                                 Log.e(TAG, "START TIME = " + hourOfDay + ":" + minute + ":" + second + " = " + startMillis);
                                 startDate.setText(TimeUtils.getTimeString(startMillis));
@@ -153,7 +153,7 @@ public class EventFormActivity extends AppCompatActivity {
                         Log.e(TAG, "END DATE = " + dayOfMonth + "/" + monthOfYear + "/" + year + " = " + endMillis);
                         showTimePicker(false, new TimePickerDialog.OnTimeSetListener() {
                             @Override
-                            public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+                            public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
                                 endMillis += (hourOfDay * TimeUtils.HOUR) + (minute * TimeUtils.MINUTE) + (second * TimeUtils.SECOND);
                                 Log.e(TAG, "END TIME = " + hourOfDay + ":" + minute + ":" + second + " = " + endMillis);
                                 endDate.setText(TimeUtils.getTimeString(endMillis));

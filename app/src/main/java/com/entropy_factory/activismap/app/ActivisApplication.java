@@ -37,17 +37,13 @@ public class ActivisApplication extends Application {
 
     public static ActivisApplication INSTANCE;
 
-    static {
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         INSTANCE = this;
 
         ActivisEvent.removeOld();
-
         new BaseActivis(this).getAccount(new ActivisListener<User>() {
             @Override
             public void onResponse(ActivisResponse<User> response) {

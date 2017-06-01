@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.AppCompatImageView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -176,8 +177,9 @@ public class OptionsView<T> extends LinearLayout {
                 boolean addOption = false;
                 boolean hasText = !TextUtils.isEmpty(option.text);
                 if (option.icon != null) {
-                    ImageView iconView = new ImageView(getContext());
+                    ImageView iconView = new AppCompatImageView(getContext());
                     iconView.setImageDrawable(option.icon);
+                    iconView.invalidate();
                     iconView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, hasText ? ViewGroup.LayoutParams.WRAP_CONTENT : ViewGroup.LayoutParams.MATCH_PARENT));
                     optionLayout.addView(iconView);
                     addOption = true;
